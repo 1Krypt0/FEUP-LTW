@@ -1,0 +1,25 @@
+.content {
+    color: #228;
+}
+
+.navbar {
+    background-color: orange;
+    padding: 0.7rem 1rem;
+    position: fixed;
+    z-index: 1;
+    top: 0;
+    left: 0;
+    width: 100%;
+    opacity: 0.9;
+}
+
+.game {
+    position: relative;
+    width: 23cm;
+    height: 17cm;
+    padding-top: 8%;
+    margin: auto;
+    font-size: xx-large;
+    border-width: 0px;
+    border-style: dotted;
+}
