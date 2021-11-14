@@ -1,4 +1,4 @@
-.content {
+.wrapper {
     color: #228;
 }
 
@@ -13,13 +13,10 @@
     opacity: 0.9;
 }
 
-.game {
+.content {
     position: relative;
-    width: 23cm;
-    height: 17cm;
+    width: 45%;
+    height: 50%;
     padding-top: 8%;
     margin: auto;
-    font-size: xx-large;
-    border-width: 0px;
-    border-style: dotted;
 }
