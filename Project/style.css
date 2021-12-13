@@ -1,17 +1,42 @@
-.wrapper {
-    color: #228;
+@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+
+main {
+    background-color: #F8F5F2;
+    font-family: 'Roboto', sans-serif;
+    width: 100%;
 }
 
-.navbar {
-    background-color: orange;
-    padding: 0.7rem 1rem;
+main > header {
+    background-color: #000B29;
+    padding: 1em 1em;
+    display: grid;
+    grid-template-columns: 1fr auto auto;
+    align-items: center;
     position: fixed;
-    z-index: 1;
     top: 0;
     left: 0;
     width: 100%;
-    opacity: 0.9;
 }
+
+main > header li {
+  display: inline-block;
+  padding-left: 3vw;
+  padding-right: 3vw;
+}
+
+ul {
+    list-style: none;
+}
+
+a, a:visited, a:hover, a:active {
+  color: #EDB83D;
+}
+
+
+header > h1 {
+    color: #D70026;
+}
+
 
 .content {
     position: relative;
@@ -58,4 +83,8 @@
     height: 15%;
     border-radius: 50%;
     background: radial-gradient(#e66465, #9198e5);
+}
+
+* {
+    color: 1px solid red;
 }
