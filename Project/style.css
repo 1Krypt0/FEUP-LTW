@@ -1,17 +1,35 @@
-@import url('https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap');
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@500&display=swap");
 
-main {
-    background-color: #F8F5F2;
-    font-family: 'Roboto', sans-serif;
+html {
+    margin: 0px;
+    height: 100%;
     width: 100%;
 }
 
+body {
+    margin: 0px;
+    min-height: 100%;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+main {
+    width: 100%;
+    height: 100%;
+    font-family: "Roboto", sans-serif;
+    overflow: hidden;
+    text-align: center;
+}
+
 main > header {
-    background-color: #000B29;
+    background-color: #000b29;
     padding: 1em 1em;
     display: grid;
     grid-template-columns: 1fr auto auto;
     align-items: center;
+    text-align: left;
     position: fixed;
     top: 0;
     left: 0;
@@ -19,72 +37,107 @@ main > header {
 }
 
 main > header li {
-  display: inline-block;
-  padding-left: 3vw;
-  padding-right: 3vw;
+    display: inline-block;
+    padding-left: 3vw;
+    padding-right: 3vw;
 }
 
 ul {
     list-style: none;
 }
 
-a, a:visited, a:hover, a:active {
-  color: #EDB83D;
+a,
+a:visited,
+a:hover,
+a:link,
+a:active {
+    color: #edb83d;
+    text-decoration: none;
 }
-
 
 header > h1 {
-    color: #D70026;
+    color: #d70026;
 }
 
-
-.content {
-    position: relative;
-    width: 45%;
-    height: 50%;
-    padding-top: 8%;
-    margin: auto;
-}
-
-.game {
-    background-color: #a47449;
-    border-radius: 25px;
-    width: 85vh;
+.board {
+    margin: 50px auto;
+    display: flex;
+    flex-flow: row;
+    width: 50vw;
     height: 30vh;
-    display: grid;
-    grid-template-columns: 1fr 6fr 1fr;
-    padding: 10px;
+    background: #a47449;
+    border-radius: 20px;
 }
 
-.cells {
-    display: grid;
-    grid-template-rows: repeat(2, 1fr);
-    grid-gap: 30px;
+/* Transition between players */
+.board,
+.board p {
+    transform: rotate(0deg);
+    transition: transform 3s ease 0s;
+}
+[data-player="two"] .board,
+[data-player="two"] .board p {
+    transform: rotate(180deg);
 }
 
+.rows {
+    flex: 7;
+    display: flex;
+    flex-direction: column;
+}
+.store {
+    border-radius: 40px;
+}
+.row,
+.store {
+    flex: 1;
+}
 .row {
-    display: inherit;
-    grid-template-columns: repeat(6, 1fr);
-    grid-gap: 30px;
-    padding: 20px;
+    display: flex;
+}
+.row.player-two {
+    flex-direction: row-reverse;
+}
+.pit,
+.store {
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: rgba(0, 0, 0, 0.15);
+    box-shadow: inset 0 0 2px rgba(0, 0, 0, 0.5);
+    cursor: default;
+}
+.pit p,
+.store p {
+    cursor: inherit;
+}
+.pit p::selection,
+.store p::selection {
+    background: transparent;
+}
+.pit {
+    flex: 1;
+    border-radius: 40%;
+}
+[data-player="one"] .row.player-one .pit,
+[data-player="two"] .row.player-two .pit {
+    cursor: pointer;
+}
+.player-two .pit,
+.store.player-two,
+[data-player="two"] .status {
+    color: radial-gradient(rgb(177, 109, 109), rgb(165, 42, 42, 1));
+}
+.player-one .pit,
+.store.player-one,
+[data-player="one"] .status {
+    color: #0074d9;
 }
 
-.cell {
-    background-color: #704f32;
-    width: 100%;
-    height: 100%;
-    border-radius: 25px;
-}
-
-/* Later on add the random rotation and position with JS */
-.piece {
-    width: 10%;
-    margin: 0 auto;
+.seed {
+    background: radial-gradient(rgb(177, 109, 109), rgb(165, 42, 42, 1));
     height: 15%;
+    width: 10%;
     border-radius: 50%;
-    background: radial-gradient(#e66465, #9198e5);
-}
-
-* {
-    color: 1px solid red;
 }
