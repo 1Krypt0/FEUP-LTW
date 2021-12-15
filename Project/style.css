@@ -13,6 +13,7 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    background-color: #f8f5f2;
 }
 
 main {
@@ -124,15 +125,9 @@ header > h1 {
 [data-player="two"] .row.player-two .pit {
     cursor: pointer;
 }
-.player-two .pit,
-.store.player-two,
-[data-player="two"] .status {
-    color: radial-gradient(rgb(177, 109, 109), rgb(165, 42, 42, 1));
-}
-.player-one .pit,
-.store.player-one,
+[data-player="two"] .status,
 [data-player="one"] .status {
-    color: #0074d9;
+    color: #d70026;
 }
 
 .seed {
