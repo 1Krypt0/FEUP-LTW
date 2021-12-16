@@ -120,6 +120,7 @@ header > h1 {
 .pit {
     flex: 1;
     border-radius: 40%;
+    position: relative;
 }
 [data-player="one"] .row.player-one .pit,
 [data-player="two"] .row.player-two .pit {
