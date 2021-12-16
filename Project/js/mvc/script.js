@@ -2,7 +2,7 @@ import { Game } from "./game.js";
 
 class Play {
     constructor() {
-        this.game = new Game("one");
+        this.game = new Game();
         this.waitingForMove = true;
     }
 
@@ -26,6 +26,7 @@ class Play {
         let clickAction = function () {
             if (game.currentPlayer_ === player && waitingForMove) {
                 waitingForMove = false;
+                console.log("this" + this);
                 let pit = parseInt(this.getAttribute("data-pit"));
                 if (!game.doPlayerTurn(pit)) {
                     waitingForMove = true;
