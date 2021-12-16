@@ -7,11 +7,11 @@ class Play {
     }
 
     setup() {
-        bindPitsAction(
+        this.bindPitsAction(
             "one",
             document.querySelectorAll(".row.player-one .pit")
         );
-        bindPitsAction(
+        this.bindPitsAction(
             "two",
             document.querySelectorAll(".row.player-two .pit")
         );
