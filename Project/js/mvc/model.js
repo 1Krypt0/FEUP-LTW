@@ -59,6 +59,10 @@ export class Mancala {
         return NaN;
     }
 
+    setCurrentPlayer(player) {
+        this.currentPlayer_ = player;
+    }
+
     setCurrentPits(pits) {
         this.currentPits_ = pits;
     }

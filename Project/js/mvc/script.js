@@ -1,34 +1,43 @@
-import { Game } from "./game.js";
+import { MancalaController } from "./controller.js";
+import { MancalaView } from "./view.js";
+import { Mancala } from "./model.js";
 
-class Play {
+class Game {
     constructor() {
-        this.game = new Game();
-        this.waitingForMove = true;
+        this.model_ = new Mancala(6);
+        this.view_ = new MancalaView(this.model_);
+        this.controller_ = new MancalaController(this.model_, this.view_);
     }
 
-    setup() {
-        this.bindPitsAction(
-            "one",
-            document.querySelectorAll(".row.player-one .pit")
-        );
-        this.bindPitsAction(
-            "two",
-            document.querySelectorAll(".row.player-two .pit")
-        );
+    getModel() {
+        return this.model_;
     }
 
-    start() {
-        this.game.loadGame();
-        this.game.init();
+    getController() {
+        return this.controller_;
     }
 
-    bindPitsAction(player, row) {
+    init() {
+        this.view_.render();
+    }
+}
+
+function playGame() {
+    let game = new Game();
+    let waitingForMove = true;
+
+    game.init();
+
+    let bindPitsAction = function (player, row) {
         let clickAction = function () {
-            if (game.currentPlayer_ === player && waitingForMove) {
+            console.log(this);
+            if (
+                game.getModel().getCurrentPlayer() === player &&
+                waitingForMove
+            ) {
                 waitingForMove = false;
-                console.log("this" + this);
                 let pit = parseInt(this.getAttribute("data-pit"));
-                if (!game.doPlayerTurn(pit)) {
+                if (!game.getController().doPlayerTurn(pit)) {
                     waitingForMove = true;
                 }
             }
@@ -38,9 +47,10 @@ class Play {
             row[pit].setAttribute("data-pit", pit);
             row[pit].onclick = clickAction;
         }
-    }
+    };
+
+    bindPitsAction("one", document.querySelectorAll(".row.player-one .pit"));
+    bindPitsAction("two", document.querySelectorAll(".row.player-two .pit"));
 }
 
-const game = new Play();
-game.setup();
-game.start();
+playGame();
