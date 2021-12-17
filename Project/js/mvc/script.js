@@ -36,7 +36,7 @@ function playGame() {
                 waitingForMove
             ) {
                 waitingForMove = false;
-                let pit = parseInt(this.getAttribute("data-pit"));
+                let pit = this; //parseInt(this.getAttribute("data-pit"));
                 if (!game.getController().doPlayerTurn(pit)) {
                     waitingForMove = true;
                 }

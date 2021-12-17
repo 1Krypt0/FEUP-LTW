@@ -13,11 +13,12 @@ export class MancalaController {
     }
 
     doPlayerTurn(pit) {
+        let pitNo = parseInt(pit.getAttribute("data-pit"));
         // perform the player's action
-        let turnOver = this.moveStones(pit);
+        let turnOver = this.moveStones(pitNo);
 
-        //update the board
-        this.getView().render();
+        //update the pit
+        //this.getView().renderPit(pit);
 
         // make sure that a player hasn't run out of stones
         if (this.checkGameOver()) {
@@ -96,6 +97,8 @@ export class MancalaController {
         let stones = this.getModel().getStones(pit);
         this.getModel().setStones(pit, 0);
 
+        this.getView().renderPitNo(pit);
+
         while (stones > 0) {
             ++pit;
 
@@ -106,6 +109,8 @@ export class MancalaController {
 
             this.getModel().addStones(pit, 1);
             stones--;
+
+            this.getView().renderPitNo(pit);
         }
 
         // Invert the pit number (number of opposite pit in opponent's row)
@@ -123,6 +128,8 @@ export class MancalaController {
                     this.getModel().getOtherPits()[inverse] +
                     1
             );
+
+            this.getView().renderStore();
 
             // Clear the pits
             this.getModel().setStones(pit, 0);
