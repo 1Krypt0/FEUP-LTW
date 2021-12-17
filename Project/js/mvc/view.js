@@ -51,9 +51,20 @@ export class MancalaView {
         }
     }
 
+    resetBoard() {
+        this.resetAllPits();
+        this.resetAllStores();
+    }
+
     drawPit(pit, amount) {
         for (let i = 0; i < amount; i++) {
             pit.appendChild(this.seedView.render());
+        }
+    }
+
+    drawStore(store, amount) {
+        for (let i = 0; i < amount; i++) {
+            store.appendChild(this.seedView.render());
         }
     }
 
@@ -67,22 +78,6 @@ export class MancalaView {
 
         this.drawStore(currentPlayerStore, this.getModel().getCurrentStore());
         this.drawStore(otherPlayerStore, this.getModel().getOtherStore());
-    }
-
-    drawStore(store, amount) {
-        for (let i = 0; i < amount; i++) {
-            store.appendChild(this.seedView.render());
-        }
-    }
-
-    resetBoard() {
-        this.resetAllPits();
-        this.resetAllStores();
-    }
-
-    drawBoard() {
-        this.drawAllPits();
-        this.drawStores();
     }
 
     drawAllPits() {
@@ -108,21 +103,13 @@ export class MancalaView {
         }
     }
 
+    drawBoard() {
+        this.drawAllPits();
+        this.drawStores();
+    }
+
     render() {
         this.resetBoard();
         this.drawBoard();
-    }
-
-    drawStones() {
-        format(this.currentPlayerStore_, this.mancala_.currentStore_);
-        format(this.otherPlayerStore_, this.mancala_.otherStore_);
-
-        for (let pit = 0; pit < 6; pit++) {
-            format(
-                this.currentPlayerPits_[pit],
-                this.mancala_.currentPits_[pit]
-            );
-            format(this.otherPlayerPits_[pit], this.mancala_.otherPits_[pit]);
-        }
     }
 }
