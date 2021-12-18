@@ -92,14 +92,14 @@ export class Mancala {
     }
 
     addStones(pit, stones) {
-        if (pit === 6) {
+        if (pit === this.getRightStoreIdx()) {
             this.currentStore_ += stones;
-        } else if (pit === 13) {
+        } else if (pit === this.getLeftStoreIdx()) {
             this.otherStore_[pit] += stones;
-        } else if (pit < 6) {
+        } else if (pit < this.getSize()) {
             this.currentPits_[pit] += stones;
         } else if (pit > 6) {
-            this.otherPits_[pit - 7] += stones;
+            this.otherPits_[pit - (this.getSize() + 1)] += stones;
         }
     }
 }
