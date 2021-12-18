@@ -167,15 +167,15 @@ export class MancalaController {
             return -1;
         }
 
-        //TODO: This will fail, figure a way for it to not
-        // Move the stones remaining in a player's row into their store
         if (currentPlayerOut && !otherPlayerOut) {
             for (let pit = 0; pit < this.getModel().getSize(); pit++) {
                 this.getModel().setOtherStore(
                     this.getModel().getCurrentStore() +
                         this.getModel().getOtherPits()[pit]
                 );
+                this.getView().renderStoreNo(this.getModel().getSize() * 2 + 1);
                 this.getModel().setStones(pit + this.getModel().getSize(), 0);
+                this.getView().renderPitNo(pit + this.getModel().getSize());
             }
         } else if (otherPlayerOut && !currentPlayerOut) {
             for (let pit = 0; pit < this.getModel().getSize(); pit++) {
@@ -183,7 +183,9 @@ export class MancalaController {
                     this.getModel().getCurrentStore() +
                         this.getModel().getCurrentPits()[pit]
                 );
+                this.getView().renderStoreNo(this.getModel().getSize());
                 this.getModel().setStones(pit, 0);
+                this.getView().renderPitNo(pit);
             }
         }
 
