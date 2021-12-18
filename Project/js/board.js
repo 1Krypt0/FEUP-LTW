@@ -22,5 +22,5 @@ class Board {
     }
 }
 
-let board = new Board(7);
+let board = new Board(6);
 board.render();

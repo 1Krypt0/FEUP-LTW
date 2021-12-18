@@ -3,8 +3,8 @@ import { MancalaView } from "./view.js";
 import { Mancala } from "./model.js";
 
 class Game {
-    constructor() {
-        this.model_ = new Mancala(7);
+    constructor(size) {
+        this.model_ = new Mancala(size);
         this.view_ = new MancalaView(this.model_);
         this.controller_ = new MancalaController(this.model_, this.view_);
     }
@@ -27,7 +27,7 @@ class Game {
 }
 
 function playGame() {
-    let game = new Game();
+    let game = new Game(6);
     let waitingForMove = true;
 
     game.init();
