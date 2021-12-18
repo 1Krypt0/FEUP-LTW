@@ -13,12 +13,16 @@ class Game {
         return this.model_;
     }
 
+    getView() {
+        return this.view_;
+    }
+
     getController() {
         return this.controller_;
     }
 
     init() {
-        this.view_.render();
+        this.getView().render();
     }
 }
 

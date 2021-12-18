@@ -17,9 +17,6 @@ export class MancalaController {
         // perform the player's action
         let turnOver = this.moveStones(pitNo);
 
-        //update the pit
-        //this.getView().renderPit(pit);
-
         // make sure that a player hasn't run out of stones
         if (this.checkGameOver()) {
             return true;

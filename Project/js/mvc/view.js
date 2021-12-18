@@ -17,6 +17,12 @@ export class MancalaView {
         }
     }
 
+    drawPit(pit, amount) {
+        for (let i = 0; i < amount; i++) {
+            pit.appendChild(this.seedView.render());
+        }
+    }
+
     resetPitNo(pitNo) {
         let row = undefined;
         let pit = undefined;
@@ -35,9 +41,40 @@ export class MancalaView {
         this.resetPit(pit);
     }
 
+    drawPitNo(pitNo) {
+        let row = undefined;
+        let amount = undefined;
+        let pit = undefined;
+        if (pitNo < this.getModel().getSize()) {
+            row = document.querySelector(
+                ".row.player-" + this.getModel().getCurrentPlayer()
+            );
+            amount = this.getModel().getCurrentPits()[pitNo];
+            pit = row.children.item(pitNo);
+        } else {
+            row = document.querySelector(
+                ".row.player-" + this.getModel().getOtherPlayer()
+            );
+            amount =
+                this.getModel().getOtherPits()[
+                    pitNo - this.getModel().getSize() - 1
+                ];
+
+            pit = row.children.item(pitNo - this.getModel().getSize() - 1);
+        }
+
+        this.drawPit(pit, amount);
+    }
+
     resetStore(store) {
         while (store.children.length != 0) {
             store.removeChild(store.firstChild);
+        }
+    }
+
+    drawStore(store, amount) {
+        for (let i = 0; i < amount; i++) {
+            store.appendChild(this.seedView.render());
         }
     }
 
@@ -88,37 +125,6 @@ export class MancalaView {
         this.resetAllStores();
     }
 
-    drawPit(pit, amount) {
-        for (let i = 0; i < amount; i++) {
-            pit.appendChild(this.seedView.render());
-        }
-    }
-
-    drawPitNo(pitNo) {
-        let row = undefined;
-        let amount = undefined;
-        let pit = undefined;
-        if (pitNo < this.getModel().getSize()) {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getCurrentPlayer()
-            );
-            amount = this.getModel().getCurrentPits()[pitNo];
-            pit = row.children.item(pitNo);
-        } else {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getOtherPlayer()
-            );
-            amount =
-                this.getModel().getOtherPits()[
-                    pitNo - this.getModel().getSize() - 1
-                ];
-
-            pit = row.children.item(pitNo - this.getModel().getSize() - 1);
-        }
-
-        this.drawPit(pit, amount);
-    }
-
     drawStoreNo(storeNo) {
         let store = undefined;
         let amount = undefined;
@@ -137,12 +143,6 @@ export class MancalaView {
         }
 
         this.drawStore(store, amount);
-    }
-
-    drawStore(store, amount) {
-        for (let i = 0; i < amount; i++) {
-            store.appendChild(this.seedView.render());
-        }
     }
 
     drawStores() {
@@ -187,14 +187,6 @@ export class MancalaView {
     renderStoreNo(store) {
         this.resetStoreNo(store);
         this.drawStoreNo(store);
-    }
-
-    renderCurrentStore() {
-        let store = document.querySelector(
-            ".store.player-" + this.getModel().getCurrentPlayer()
-        );
-        this.resetStore(store);
-        this.drawStore(store);
     }
 
     drawBoard() {
