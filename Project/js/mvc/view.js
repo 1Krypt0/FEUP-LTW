@@ -167,7 +167,6 @@ export class MancalaView {
         );
 
         let arr = this.getModel().getCurrentPits();
-        console.log(this.getModel().getCurrentPits());
         for (let i = 0; i < arr.length; i++) {
             const pit = currentRowPit.children.item(i);
             this.drawPit(pit, arr[i]);
