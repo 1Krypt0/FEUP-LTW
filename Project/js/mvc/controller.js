@@ -110,7 +110,14 @@ export class MancalaController {
             this.getModel().addStones(pit, 1);
             stones--;
 
-            this.getView().renderPitNo(pit);
+            if (
+                pit === this.getModel().getSize() ||
+                pit === this.getModel().getSize() * 2 + 1
+            ) {
+                this.getView().renderStoreNo(pit);
+            } else {
+                this.getView().renderPitNo(pit);
+            }
         }
 
         // Invert the pit number (number of opposite pit in opponent's row)
@@ -129,14 +136,19 @@ export class MancalaController {
                     1
             );
 
-            this.getView().renderStore();
+            this.getView().renderStoreNo(this.getModel().getSize());
 
             // Clear the pits
             this.getModel().setStones(pit, 0);
+
+            this.getView().renderPitNo(pit);
+
             this.getModel().setStones(
                 this.getModel().getSize() + 1 + inverse,
                 0
             );
+
+            this.getView().renderPitNo(this.getModel().getSize() + 1 + inverse);
         }
 
         // the user's turn ended if the stones did not end in the storage pit

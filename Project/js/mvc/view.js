@@ -19,17 +19,20 @@ export class MancalaView {
 
     resetPitNo(pitNo) {
         let row = undefined;
+        let pit = undefined;
         if (pitNo < this.getModel().getSize()) {
             row = document.querySelector(
                 ".row.player-" + this.getModel().getCurrentPlayer()
             );
+
+            pit = row.children.item(pitNo);
         } else {
             row = document.querySelector(
                 ".row.player-" + this.getModel().getOtherPlayer()
             );
+            pit = row.children.item(pitNo - this.getModel().getSize() - 1);
         }
-        const pit = row.children.item(pitNo);
-        this.resetPit(pitNo);
+        this.resetPit(pit);
     }
 
     resetStore(store) {
@@ -94,21 +97,25 @@ export class MancalaView {
     drawPitNo(pitNo) {
         let row = undefined;
         let amount = undefined;
+        let pit = undefined;
         if (pitNo < this.getModel().getSize()) {
             row = document.querySelector(
                 ".row.player-" + this.getModel().getCurrentPlayer()
             );
             amount = this.getModel().getCurrentPits()[pitNo];
+            pit = row.children.item(pitNo);
         } else {
             row = document.querySelector(
                 ".row.player-" + this.getModel().getOtherPlayer()
             );
             amount =
                 this.getModel().getOtherPits()[
-                    pitNo - this.getModel().getSize()
+                    pitNo - this.getModel().getSize() - 1
                 ];
+
+            pit = row.children.item(pitNo - this.getModel().getSize() - 1);
         }
-        const pit = row.children.item(pitNo);
+
         this.drawPit(pit, amount);
     }
 

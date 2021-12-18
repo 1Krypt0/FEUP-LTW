@@ -30,7 +30,6 @@ function playGame() {
 
     let bindPitsAction = function (player, row) {
         let clickAction = function () {
-            console.log(this);
             if (
                 game.getModel().getCurrentPlayer() === player &&
                 waitingForMove
