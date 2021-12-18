@@ -149,7 +149,7 @@ export class MancalaController {
         }
 
         // the user's turn ended if the stones did not end in the storage pit
-        return pit !== 6;
+        return pit !== this.getModel().getSize();
     }
 
     checkWinner() {

@@ -4,7 +4,7 @@ import { Mancala } from "./model.js";
 
 class Game {
     constructor() {
-        this.model_ = new Mancala(6);
+        this.model_ = new Mancala(7);
         this.view_ = new MancalaView(this.model_);
         this.controller_ = new MancalaController(this.model_, this.view_);
     }
