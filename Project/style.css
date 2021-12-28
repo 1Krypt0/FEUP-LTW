@@ -21,6 +21,9 @@ main {
     height: 100%;
     font-family: "Roboto", sans-serif;
     overflow: hidden;
+}
+
+.status {
     text-align: center;
 }
 
@@ -130,23 +133,6 @@ header > h1 {
     left: 75%;
 }
 
-/* Navbar container */
-.navbar {
-    overflow: hidden;
-    background-color: #333;
-    font-family: Arial;
-}
-
-/* Links inside the navbar */
-.navbar a {
-    float: left;
-    font-size: 16px;
-    color: white;
-    text-align: center;
-    padding: 14px 16px;
-    text-decoration: none;
-}
-
 /* The dropdown container */
 .dropdown {
     float: left;
@@ -171,32 +157,6 @@ header > h1 {
 }
 
 /* Dropdown content (hidden by default) */
-.dropdown-content {
-    float: left;
-    display: none;
-    position: absolute;
-    background-color: #f9f9f9;
-    min-width: 160px;
-    box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
-    text-align: justify;
-    z-index: 1;
-    padding: 15px;
-}
-
-/* Links inside the dropdown */
-.dropdown-content a {
-    float: none;
-    color: black;
-    padding: 12px 16px;
-    text-decoration: none;
-    display: block;
-    text-align: left;
-}
-
-/* Show the dropdown menu on hover */
-.dropdown:hover .dropdown-content {
-    display: block;
-}
 
 table.scoreboard {
     margin: auto;
@@ -232,6 +192,9 @@ table.scoreboard tr {
 /* Modal Content/Box */
 .modal-content {
     background-color: #fefefe;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     border-radius: 25px;
     position: relative;
     margin: 10% auto; /* 15% from the top and centered */
@@ -254,9 +217,25 @@ table.scoreboard tr {
     }
 }
 
+input {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    width: 100%;
+}
+
+form {
+    vertical-align: middle;
+    margin: 0 auto;
+    padding: 1em;
+    max-width: 45em;
+}
+
 /* The Close Button */
-#modal-close {
+.modal-close {
     color: #aaa;
+    position: absolute;
+    top: 0;
+    right: 0;
     float: right;
     font-size: 28px;
     margin-right: 1rem;
@@ -264,8 +243,8 @@ table.scoreboard tr {
     font-weight: bold;
 }
 
-#modal-close:hover,
-#modal-close:focus {
+.modal-close:hover,
+.modal-close:focus {
     color: black;
     text-decoration: none;
     cursor: pointer;
