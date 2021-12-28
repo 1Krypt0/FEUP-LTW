@@ -52,79 +52,80 @@
 
             <section id="instructions-modal" class="modal">
                 <article class="modal-content">
-                    <span class="modal-close" id="instructions-modal-close"
-                        >&times;</span
-                    >
-                    <div class="dropdown-content">
-                        <dl>
-                            <dt><b>Board</b></dt>
-                            <dd>
+                    <span class="modal-close" id="instructions-modal-close">
+                        &times;
+                    </span>
+                    <div class="instructions-content">
+                        <h2 id="instructions-header">Instructions</h2>
+                        <ul>
+                            <li>
+                                Board:
                                 <ul>
                                     <li>
                                         Each player controls the cavities on
                                         their side, as well as the storage on
-                                        their right
+                                        their right. Player one will play on the
+                                        bottom, and player 2 on top
                                     </li>
                                 </ul>
-                            </dd>
-                            <dt><b>Way of the game</b></dt>
-                            <dd>
+                            </li>
+
+                            <li>
+                                Way of the game:
                                 <ul>
                                     <li>
-                                        Players sow their seeds alternably,
-                                        starting on their cavities
+                                        Players sow their seeds in an
+                                        alternating fashion, starting on their
+                                        cavities
                                     </li>
                                     <li>
-                                        Depending on the last positions the seed
-                                        was sown, each player can
+                                        Depending on the position the last seed
+                                        was sown, the player can either play
+                                        again, or his turn ends. seeds
                                     </li>
-                                    <ul>
-                                        <li>play again</li>
-                                        <li>
-                                            keep some of the opponent's seeds
-                                        </li>
-                                    </ul>
                                     <li>
                                         The game ends when one of the players
-                                        lose all of his seeds
+                                        has no more seeds on his side of the
+                                        board and cannot make any move
                                     </li>
                                 </ul>
-                            </dd>
-                            <dt><b>Sowing</b></dt>
-                            <dd>
+                            </li>
+                            <li>
+                                Sowing
                                 <ul>
-                                    <li>Chose a cavitie on your side</li>
-                                    <li>Collect all the N seeds from it</li>
+                                    <li>Chose a cavity on your side</li>
+                                    <li>Collect all seeds from it</li>
                                     <li>
-                                        Place one seed on the N following
-                                        cavities (The sowing is made on the
-                                        anti-horary sense)
+                                        Place one seed on the following cavities
+                                        (The sowing is made in a
+                                        counter-clockwise fashion)
                                     </li>
                                 </ul>
-                            </dd>
-                            <dt><b>Keep sowing</b></dt>
-                            <dd>
+                            </li>
+                            <li>
+                                Keep sowing
                                 <ul>
                                     <li>
-                                        If the following cavitie is your
-                                        storage, place a seed on it too
+                                        If the following cavity is your storage,
+                                        place a seed on it too
                                     </li>
                                     <li>
-                                        If there's seeds remaining, keep sowing
-                                        on the opponents side
+                                        If there are seeds remaining, keep
+                                        sowing on the opponents side
                                     </li>
                                     <li>
                                         If it reaches the opponents storage,
-                                        <b>do not</b> sow there
+                                        <b>do not</b> sow there, and keep on to
+                                        your side of the board
                                     </li>
                                     <li>
                                         You can keep sowing on your side if
-                                        there's seeds remaining
+                                        there are seeds remaining
                                     </li>
                                 </ul>
-                            </dd>
-                            <dt><b>Last seed sown</b></dt>
-                            <dd>
+                            </li>
+                            <li>
+                                Last seed sown
                                 <ul>
                                     <li>
                                         If your last seed was sown in your
@@ -137,15 +138,15 @@
                                     </li>
                                     <ul>
                                         <li>
-                                            The seeds from the opposing cavity
-                                            (opponent's)
+                                            The seeds from the opposing cavity,
+                                            that belong to the opponent
                                         </li>
-                                        <li>The last seed you have sown</li>
+                                        <li>And the last seed you have sown</li>
                                     </ul>
                                 </ul>
-                            </dd>
-                            <dt><b>End</b></dt>
-                            <dd>
+                            </li>
+                            <li>
+                                End
                                 <ul>
                                     <li>
                                         The game ends when one of the players
@@ -159,11 +160,11 @@
                                     </li>
                                     <li>
                                         The player with more seeds on his
-                                        storage <b>wins</b>
+                                        storage wins the game
                                     </li>
                                 </ul>
-                            </dd>
-                        </dl>
+                            </li>
+                        </ul>
                     </div>
                 </article>
             </section>
@@ -173,7 +174,10 @@
                 <nav>
                     <ul>
                         <li>
-                            <a id="Instructions" href="#">Instructions</a>
+                            <a id="instructions" href="#">Instructions</a>
+                        </li>
+                        <li>
+                            <a id="scoreboard" href="#">Scoreboard</a>
                         </li>
                         <li>
                             <a href="#">Logout</a>
@@ -181,174 +185,6 @@
                     </ul>
                 </nav>
             </header>
-            <!--
-            <div class="navbar">
-                <div class="dropdown">
-                    <button class="dropbtn">Scoreboard</button>
-                    <div class="dropdown-content">
-                        <table class="scoreboard">
-                            <caption>
-                                Scoreboard
-                            </caption>
-                            <tr>
-                                <td>Tomas</td>
-                                <td>1</td>
-                            </tr>
-                            <tr>
-                                <td>Tomas</td>
-                                <td>1</td>
-                            </tr>
-                        </table>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">Login</button>
-                    <div class="dropdown-content">
-                        Login
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td></td>
-                                </tr>
-                            </thead>
-                            <tbody>
-                                <tr>
-                                    <td>name: <input type="text" /></td>
-                                </tr>
-                                <tr>
-                                    <td>email: <input type="email" /></td>
-                                </tr>
-                                <tr>
-                                    <td>phone: <input type="tel" /></td>
-                                </tr>
-                                <tr>
-                                    <td>
-                                        <input type="reset" /><input
-                                            type="submit"
-                                        />
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
-                    </div>
-                </div>
-                <div class="dropdown">
-                    <button class="dropbtn">
-                        Instructions <i class="fa fa-caret-down"></i>
-                    </button>
-                    <div class="dropdown-content">
-                        <dl>
-                            <dt><b>Board</b></dt>
-                            <dd>
-                                <ul>
-                                    <li>
-                                        Each player controls the cavities on
-                                        their side, as well as the storage on
-                                        their right
-                                    </li>
-                                </ul>
-                            </dd>
-                            <dt><b>Way of the game</b></dt>
-                            <dd>
-                                <ul>
-                                    <li>
-                                        Players sow their seeds alternably,
-                                        starting on their cavities
-                                    </li>
-                                    <li>
-                                        Depending on the last positions the seed
-                                        was sown, each player can
-                                    </li>
-                                    <ul>
-                                        <li>play again</li>
-                                        <li>
-                                            keep some of the opponent's seeds
-                                        </li>
-                                    </ul>
-                                    <li>
-                                        The game ends when one of the players
-                                        lose all of his seeds
-                                    </li>
-                                </ul>
-                            </dd>
-                            <dt><b>Sowing</b></dt>
-                            <dd>
-                                <ul>
-                                    <li>Chose a cavitie on your side</li>
-                                    <li>Collect all the N seeds from it</li>
-                                    <li>
-                                        Place one seed on the N following
-                                        cavities (The sowing is made on the
-                                        anti-horary sense)
-                                    </li>
-                                </ul>
-                            </dd>
-                            <dt><b>Keep sowing</b></dt>
-                            <dd>
-                                <ul>
-                                    <li>
-                                        If the following cavitie is your
-                                        storage, place a seed on it too
-                                    </li>
-                                    <li>
-                                        If there's seeds remaining, keep sowing
-                                        on the opponents side
-                                    </li>
-                                    <li>
-                                        If it reaches the opponents storage,
-                                        <b>do not</b> sow there
-                                    </li>
-                                    <li>
-                                        You can keep sowing on your side if
-                                        there's seeds remaining
-                                    </li>
-                                </ul>
-                            </dd>
-                            <dt><b>Last seed sown</b></dt>
-                            <dd>
-                                <ul>
-                                    <li>
-                                        If your last seed was sown in your
-                                        storage, you can play again
-                                    </li>
-                                    <li>
-                                        If your last seed was sown in one of
-                                        your empty cavities, transfer to your
-                                        storage:
-                                    </li>
-                                    <ul>
-                                        <li>
-                                            The seeds from the opposing cavity
-                                            (opponent's)
-                                        </li>
-                                        <li>The last seed you have sown</li>
-                                    </ul>
-                                </ul>
-                            </dd>
-                            <dt><b>End</b></dt>
-                            <dd>
-                                <ul>
-                                    <li>
-                                        The game ends when one of the players
-                                        can't play (because all of his cavities
-                                        are empty)
-                                    </li>
-                                    <li>
-                                        The opposing player collects all the
-                                        seeds from his cavities and transfers
-                                        them to his storage
-                                    </li>
-                                    <li>
-                                        The player with more seeds on his
-                                        storage <b>wins</b>
-                                    </li>
-                                </ul>
-                            </dd>
-                        </dl>
-                    </div>
-                </div>
-            </div>
--->
             <section data-player="one">
                 <div class="board">
                     <div class="player-two store"></div>
