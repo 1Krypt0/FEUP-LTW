@@ -16,6 +16,15 @@ body {
     background-color: #f8f5f2;
 }
 
+ul {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+#instructions-header {
+    text-align: center;
+}
+
 main {
     width: 100%;
     height: 100%;
@@ -44,10 +53,6 @@ main > header li {
     display: inline-block;
     padding-left: 3vw;
     padding-right: 3vw;
-}
-
-ul {
-    list-style: none;
 }
 
 a,
@@ -133,31 +138,6 @@ header > h1 {
     left: 75%;
 }
 
-/* The dropdown container */
-.dropdown {
-    float: left;
-    overflow: hidden;
-}
-
-/* Dropdown button */
-.dropdown .dropbtn {
-    float: left;
-    font-size: 16px;
-    border: none;
-    outline: none;
-    color: white;
-    padding: 14px 16px;
-    background-color: inherit;
-}
-
-/* Add a red background color to navbar links on hover */
-.navbar a:hover,
-.dropdown:hover .dropbtn {
-    background-color: red;
-}
-
-/* Dropdown content (hidden by default) */
-
 table.scoreboard {
     margin: auto;
     width: 200px;
@@ -191,17 +171,17 @@ table.scoreboard tr {
 
 /* Modal Content/Box */
 .modal-content {
-    background-color: #fefefe;
+    background-color: #f8f5f2;
     display: flex;
     align-items: center;
     justify-content: center;
     border-radius: 25px;
     position: relative;
-    margin: 10% auto; /* 15% from the top and centered */
+    margin: 6% auto; /* 15% from the top and centered */
     padding: 0;
     border: 1px solid #888;
     width: 80%; /* Could be more or less, depending on screen size */
-    height: 70%;
+    height: 75%;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
 }
 
