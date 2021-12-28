@@ -170,7 +170,7 @@ export class MancalaController {
         if (currentPlayerOut && !otherPlayerOut) {
             for (let pit = 0; pit < this.getModel().getSize(); pit++) {
                 this.getModel().setOtherStore(
-                    this.getModel().getCurrentStore() +
+                    this.getModel().getOtherStore() +
                         this.getModel().getOtherPits()[pit]
                 );
                 this.getView().renderStoreNo(this.getModel().getSize() * 2 + 1);

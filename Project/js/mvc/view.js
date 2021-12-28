@@ -12,6 +12,9 @@ export class MancalaView {
     }
 
     resetPit(pit) {
+        if (pit === null) {
+            return;
+        }
         while (pit.children.length != 0) {
             pit.removeChild(pit.firstChild);
         }
