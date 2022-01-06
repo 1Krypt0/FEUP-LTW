@@ -98,7 +98,7 @@ export class Mancala {
             this.player2Store_ += stones;
         } else if (pit < this.getSize()) {
             this.player1Pits_[pit] += stones;
-        } else if (pit > 6) {
+        } else if (pit > this.getSize()) {
             this.player2Pits_[pit - (this.getSize() + 1)] += stones;
         }
     }
