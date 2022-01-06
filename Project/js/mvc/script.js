@@ -39,7 +39,7 @@ export function playGame(size, seeds) {
                 waitingForMove
             ) {
                 waitingForMove = false;
-                let pit = this; //parseInt(this.getAttribute("data-pit"));
+                let pit = this;
                 if (!game.getController().doPlayerTurn(pit)) {
                     waitingForMove = true;
                 }
