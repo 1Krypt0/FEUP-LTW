@@ -32,6 +32,7 @@ export class MancalaController {
 
     switchTurn() {
         this.getModel().setCurrentPlayer(this.getModel().getOtherPlayer());
+
         this.flipBoard();
 
         let currentPlayer = this.getModel().getCurrentPlayer();
@@ -55,7 +56,7 @@ export class MancalaController {
         if (winner < 0) {
             return false;
         }
-
+        //TODO: Figure out what this does
         document
             .getElementsByTagName("section")
             .item(0)
@@ -74,16 +75,6 @@ export class MancalaController {
         return true;
     }
 
-    flipBoard() {
-        let currentPitsSwap = this.getModel().getCurrentPits();
-        this.getModel().setCurrentPits(this.getModel().getOtherPits());
-        this.getModel().setOtherPits(currentPitsSwap);
-
-        let currentStoreSwap = this.getModel().getCurrentStore();
-        this.getModel().setCurrentStore(this.getModel().getOtherStore());
-        this.getModel().setOtherStore(currentStoreSwap);
-    }
-
     moveStones(pit) {
         // return if pit has no stones
         if (this.getModel().getStones(pit) < 1) {
@@ -100,8 +91,16 @@ export class MancalaController {
             ++pit;
 
             // wrap around the board before reaching other player's store
-            if (pit > this.getModel().getSize() * 2) {
+            if (
+                pit > this.getModel().getSize() * 2 &&
+                this.getModel.getCurrentPlayer() == "one"
+            ) {
                 pit = 0;
+            } else if (
+                pit == this.getModel().getSize() &&
+                this.getModel().getCurrentPlayer() == "two"
+            ) {
+                pit++;
             }
 
             this.getModel().addStones(pit, 1);
@@ -118,34 +117,44 @@ export class MancalaController {
         }
 
         // Invert the pit number (number of opposite pit in opponent's row)
-        let inverse = this.getModel().getSize() - 1 - pit;
-
-        // Check for capture
         if (
+            this.getModel.getCurrentPlayer() == "one" &&
             pit < this.getModel().getSize() &&
-            this.getModel().getCurrentPits()[pit] === 1 &&
-            this.getModel().getOtherPits()[inverse] > 0
+            this.getModel().getStones(pit) === 1
         ) {
-            // Transfer this pit's stones along with opposite pit's stones to store
-            this.getModel().setCurrentStore(
-                this.getModel().getCurrentStore() +
-                    this.getModel().getOtherPits()[inverse] +
-                    1
+            let inverse = this.getModel().getSize() - 1 - pit;
+            let seeds = this.getModel().getPlayer2Pits()[inverse];
+            this.getModel().setPlayer1Store(
+                this.getModel().getPlayer1Store() + seeds + 1
             );
+            this.getModel().setStones(pit, 0);
+            this.getModel().setStones(this.getModel().getSize() + 1 + pit, 0);
 
             this.getView().renderStoreNo(this.getModel().getSize());
-
-            // Clear the pits
-            this.getModel().setStones(pit, 0);
-
             this.getView().renderPitNo(pit);
+            this.getView().renderPitNo(this.getModel().getSize() + 1 + pit);
 
-            this.getModel().setStones(
-                this.getModel().getSize() + 1 + inverse,
-                0
+            return true;
+        }
+
+        if (
+            this.getModel().getCurrentPlayer === "two" &&
+            pit > this.getModel().getSize() &&
+            this.getModel().getStones(pit) === 1
+        ) {
+            let inverse = this.getModel().getSize() - 1 - pit;
+            let seeds = this.getModel().getPlayer1Pits()[inverse];
+            this.getModel().setPlayer2Store(
+                this.getModel().getPlayer2Store() + seeds + 1
             );
+            this.getModel().setStones(pit, 0);
+            this.getModel().setStones(pit - this.getModel().getSize() - 1, 0);
 
-            this.getView().renderPitNo(this.getModel().getSize() + 1 + inverse);
+            this.getView().renderStoreNo(this.getModel().getSize() * 2 + 1);
+            this.getView().renderPitNo(pit);
+            this.getView().renderPitNo(pit - this.getModel().getSize() - 1);
+
+            return true;
         }
 
         // the user's turn ended if the stones did not end in the storage pit
@@ -159,46 +168,58 @@ export class MancalaController {
             });
         };
 
-        const currentPlayerOut = isRowEmpty(this.getModel().getCurrentPits());
-        const otherPlayerOut = isRowEmpty(this.getModel().getOtherPits());
+        if (this.getModel().getCurrentPlayer() === "one") {
+            const player2Out = isRowEmpty(this.getModel().getPlayer2Pits());
 
-        // the game is not over if neither player has an empty row
-        if (!currentPlayerOut && !otherPlayerOut) {
-            return -1;
-        }
-
-        if (currentPlayerOut && !otherPlayerOut) {
-            for (let pit = 0; pit < this.getModel().getSize(); pit++) {
-                this.getModel().setOtherStore(
-                    this.getModel().getOtherStore() +
-                        this.getModel().getOtherPits()[pit]
+            if (!player2Out) {
+                return -1;
+            } else {
+                for (let pit = 0; pit < this.getModel().getSize(); pit++) {
+                    this.getModel().addStones(
+                        this.getModel().getPlayer1StoreIdx(),
+                        this.getModel().getStones(pit)
+                    );
+                    this.getModel().setStones(pit, 0);
+                    this.getView().renderPitNo(pit);
+                }
+                this.getView().renderStoreNo(
+                    this.getModel().getPlayer1StoreIdx()
                 );
-                this.getView().renderStoreNo(this.getModel().getSize() * 2 + 1);
-                this.getModel().setStones(pit + this.getModel().getSize(), 0);
-                this.getView().renderPitNo(pit + this.getModel().getSize());
             }
-        } else if (otherPlayerOut && !currentPlayerOut) {
-            for (let pit = 0; pit < this.getModel().getSize(); pit++) {
-                this.getModel().setCurrentStore(
-                    this.getModel().getCurrentStore() +
-                        this.getModel().getCurrentPits()[pit]
+        } else if (this.getModel.getCurrentPlayer() === "two") {
+            const player1Out = isRowEmpty(this.getModel().getPlayer1Pits());
+
+            if (!player1Out) {
+                return -1;
+            } else {
+                for (
+                    let pit = this.getModel().getSize() + 1;
+                    pit < this.getModel().getSize() * 2 + 1;
+                    pit++
+                ) {
+                    this.getModel().addStones(
+                        this.getModel().getPlayer2StoreIdx(),
+                        this.getModel().getStones(pit)
+                    );
+                    this.getModel().setStones(pit, 0);
+                    this.getView().renderPitNo(pit);
+                }
+                this.getView().renderStoreNo(
+                    this.getModel().getPlayer2StoreIdx()
                 );
-                this.getView().renderStoreNo(this.getModel().getSize());
-                this.getModel().setStones(pit, 0);
-                this.getView().renderPitNo(pit);
             }
         }
 
         if (
-            this.getModel().getOtherStore() > this.getModel().getCurrentStore()
+            this.getModel().getPlayer1Store() >
+            this.getModel().getPlayer2Store()
         ) {
-            // current player wins
-            return this.getModel().getCurrentPlayer() === "one" ? 1 : 2;
+            return 1;
         } else if (
-            this.getModel().getCurrentStore() > this.getModel().getOtherStore()
+            this.getModel().getPlayer2Store() >
+            this.getModel().getPlayer1Store()
         ) {
-            // other player wins
-            return this.getModel().getCurrentPlayer() === "one" ? 2 : 1;
+            return 2;
         } else {
             return 0;
         }
