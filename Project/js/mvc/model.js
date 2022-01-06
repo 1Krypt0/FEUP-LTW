@@ -1,10 +1,10 @@
 export class Mancala {
-    constructor(size) {
+    constructor(size, seeds) {
         this.size_ = size;
 
         this.currentPlayer_ = "one";
-        this.currentPits_ = Array(size).fill(4);
-        this.otherPits_ = Array(size).fill(4);
+        this.currentPits_ = Array(size).fill(seeds);
+        this.otherPits_ = Array(size).fill(seeds);
         this.currentStore_ = 0;
         this.otherStore_ = 0;
     }

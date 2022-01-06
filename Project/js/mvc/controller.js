@@ -190,12 +190,12 @@ export class MancalaController {
         }
 
         if (
-            this.getModel().getCurrentStore() > this.getModel().getOtherStore()
+            this.getModel().getOtherStore() > this.getModel().getCurrentStore()
         ) {
             // current player wins
             return this.getModel().getCurrentPlayer() === "one" ? 1 : 2;
         } else if (
-            this.getModel().getOtherStore() > this.getModel().getCurrentStore()
+            this.getModel().getCurrentStore() > this.getModel().getOtherStore()
         ) {
             // other player wins
             return this.getModel().getCurrentPlayer() === "one" ? 2 : 1;

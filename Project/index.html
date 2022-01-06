@@ -8,7 +8,7 @@
             content="The best game you have never heard of"
         />
         <link rel="stylesheet" href="style.css" />
-        <script src="js/modal/start-modal.js" defer></script>
+        <script type="module" src="js/modal/start-modal.js" defer></script>
         <script src="js/modal/instructions-modal.js" defer></script>
         <script src="./js/board.js" defer></script>
         <script type="module" src="./js/mvc/script.js"></script>
@@ -18,7 +18,7 @@
             <section id="myModal" class="modal">
                 <article class="modal-content">
                     <span class="modal-close" id="modal-close">&times;</span>
-                    <form>
+                    <form id="seed-form">
                         <label for="pitNo"
                             >Please enter the amount of pits on each side of the
                             board:
@@ -40,12 +40,12 @@
                             type="number"
                             name="seedNo"
                             id="seedNo"
-                            placeholder="4"
+                            placeholder="6"
                         />
 
                         <br />
                         <br />
-                        <button type="submit">Submit</button>
+                        <button type="button" id="parameters">Submit</button>
                     </form>
                 </article>
             </section>

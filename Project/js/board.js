@@ -1,10 +1,14 @@
-class Board {
-    constructor(size) {
+export class Board {
+    constructor(size, seeds) {
         this.size_ = size;
+        this.seeds_ = size;
     }
 
     getSize() {
         return this.size_;
+    }
+    getSeeds() {
+        return this.seeds_;
     }
     render() {
         let rowOne = document.querySelector(".row.player-one");
@@ -21,6 +25,3 @@ class Board {
         }
     }
 }
-
-let board = new Board(6);
-board.render();
