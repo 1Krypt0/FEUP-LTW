@@ -1,6 +1,5 @@
 import { SeedView } from "./viewers/seedview.js";
 
-//TODO: Divide into more granular views.
 export class MancalaView {
     constructor(model) {
         this.model_ = model;
@@ -30,15 +29,10 @@ export class MancalaView {
         let row = undefined;
         let pit = undefined;
         if (pitNo < this.getModel().getSize()) {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getCurrentPlayer()
-            );
-
+            row = document.querySelector(".row.player-1");
             pit = row.children.item(pitNo);
         } else {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getOtherPlayer()
-            );
+            row = document.querySelector(".row.player-2");
             pit = row.children.item(pitNo - this.getModel().getSize() - 1);
         }
         this.resetPit(pit);
@@ -49,17 +43,13 @@ export class MancalaView {
         let amount = undefined;
         let pit = undefined;
         if (pitNo < this.getModel().getSize()) {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getCurrentPlayer()
-            );
-            amount = this.getModel().getCurrentPits()[pitNo];
+            row = document.querySelector(".row.player-1");
+            amount = this.getModel().getPlayer1Pits()[pitNo];
             pit = row.children.item(pitNo);
         } else {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getOtherPlayer()
-            );
+            row = document.querySelector(".row.player-2");
             amount =
-                this.getModel().getOtherPits()[
+                this.getModel().getPlayer2Pits()[
                     pitNo - this.getModel().getSize() - 1
                 ];
 
@@ -83,43 +73,31 @@ export class MancalaView {
 
     resetStoreNo(store) {
         if (store === this.getModel().getSize()) {
-            store = document.querySelector(
-                ".store.player-" + this.getModel().getCurrentPlayer()
-            );
+            store = document.querySelector(".store.player-1");
         } else {
-            store = document.querySelector(
-                ".store.player-" + this.getModel().getOtherPlayer()
-            );
+            store = document.querySelector(".store.player-2");
         }
 
         this.resetStore(store);
     }
 
     resetAllStores() {
-        let currentPlayerStore = document.querySelector(
-            ".store.player-" + this.getModel().getCurrentPlayer()
-        );
-        let otherPlayerStore = document.querySelector(
-            ".store.player-" + this.getModel().getOtherPlayer()
-        );
+        let player1Store = document.querySelector(".store.player-1");
+        let player2Store = document.querySelector(".store.player-2");
 
-        this.resetStore(currentPlayerStore);
-        this.resetStore(otherPlayerStore);
+        this.resetStore(player1Store);
+        this.resetStore(player2Store);
     }
 
     resetAllPits() {
-        let currentRowPit = document.querySelector(
-            ".row.player-" + this.getModel().getCurrentPlayer()
-        );
-        let otherRowPit = document.querySelector(
-            ".row.player-" + this.getModel().getOtherPlayer()
-        );
+        let player1Row = document.querySelector(".row.player-1");
+        let player2Row = document.querySelector(".row.player-2");
 
         for (let i = 0; i < this.getModel().getSize(); i++) {
-            const currentPlayerPit = currentRowPit.children.item(i);
-            const otherPlayerPit = otherRowPit.children.item(i);
-            this.resetPit(currentPlayerPit);
-            this.resetPit(otherPlayerPit);
+            const player1Pit = player1Row.children.item(i);
+            const player2Pit = player2Row.children.item(i);
+            this.resetPit(player1Pit);
+            this.resetPit(player2Pit);
         }
     }
 
@@ -132,52 +110,40 @@ export class MancalaView {
         let store = undefined;
         let amount = undefined;
         if (storeNo === this.getModel().getSize()) {
-            store = document.querySelector(
-                ".store.player-" + this.getModel().getCurrentPlayer()
-            );
+            store = document.querySelector(".store.player-1");
 
-            amount = this.getModel().getCurrentStore();
+            amount = this.getModel().getPlayer1Store();
         } else {
-            store = document.querySelector(
-                ".store.player-" + this.getModel().getOtherPlayer()
-            );
+            store = document.querySelector(".store.player-2");
 
-            amount = this.getModel().getOtherStore();
+            amount = this.getModel().getPlayer2Store();
         }
 
         this.drawStore(store, amount);
     }
 
     drawStores() {
-        let currentPlayerStore = document.querySelector(
-            ".store.player-" + this.getModel().getCurrentPlayer()
-        );
-        let otherPlayerStore = document.querySelector(
-            ".store.player-" + this.getModel().getOtherPlayer()
-        );
+        let player1Store = document.querySelector(".store.player-1");
+        let player2Store = document.querySelector(".store.player-2");
 
-        this.drawStore(currentPlayerStore, this.getModel().getCurrentStore());
-        this.drawStore(otherPlayerStore, this.getModel().getOtherStore());
+        this.drawStore(player1Store, this.getModel().getPlayer1Store());
+        this.drawStore(player2Store, this.getModel().getPlayer2Store());
     }
 
     drawAllPits() {
-        let currentRowPit = document.querySelector(
-            ".row.player-" + this.getModel().getCurrentPlayer()
-        );
+        let player1Pits = document.querySelector(".row.player-1");
 
-        let otherRowPit = document.querySelector(
-            ".row.player-" + this.getModel().getOtherPlayer()
-        );
+        let player2Pits = document.querySelector(".row.player-2");
 
-        let arr = this.getModel().getCurrentPits();
+        let arr = this.getModel().getPlayer1Pits();
         for (let i = 0; i < arr.length; i++) {
-            const pit = currentRowPit.children.item(i);
+            const pit = player1Pits.children.item(i);
             this.drawPit(pit, arr[i]);
         }
 
-        arr = this.getModel().getOtherPits();
+        arr = this.getModel().getPlayer2Pits();
         for (let i = 0; i < arr.length; i++) {
-            const pit = otherRowPit.children.item(i);
+            const pit = player2Pits.children.item(i);
             this.drawPit(pit, arr[i]);
         }
     }
