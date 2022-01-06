@@ -29,10 +29,10 @@ export class MancalaView {
         let row = undefined;
         let pit = undefined;
         if (pitNo < this.getModel().getSize()) {
-            row = document.querySelector(".row.player-1");
+            row = document.querySelector(".row.player-one");
             pit = row.children.item(pitNo);
         } else {
-            row = document.querySelector(".row.player-2");
+            row = document.querySelector(".row.player-two");
             pit = row.children.item(pitNo - this.getModel().getSize() - 1);
         }
         this.resetPit(pit);
@@ -43,11 +43,11 @@ export class MancalaView {
         let amount = undefined;
         let pit = undefined;
         if (pitNo < this.getModel().getSize()) {
-            row = document.querySelector(".row.player-1");
+            row = document.querySelector(".row.player-one");
             amount = this.getModel().getPlayer1Pits()[pitNo];
             pit = row.children.item(pitNo);
         } else {
-            row = document.querySelector(".row.player-2");
+            row = document.querySelector(".row.player-two");
             amount =
                 this.getModel().getPlayer2Pits()[
                     pitNo - this.getModel().getSize() - 1
@@ -73,25 +73,25 @@ export class MancalaView {
 
     resetStoreNo(store) {
         if (store === this.getModel().getSize()) {
-            store = document.querySelector(".store.player-1");
+            store = document.querySelector(".store.player-one");
         } else {
-            store = document.querySelector(".store.player-2");
+            store = document.querySelector(".store.player-two");
         }
 
         this.resetStore(store);
     }
 
     resetAllStores() {
-        let player1Store = document.querySelector(".store.player-1");
-        let player2Store = document.querySelector(".store.player-2");
+        let player1Store = document.querySelector(".store.player-one");
+        let player2Store = document.querySelector(".store.player-two");
 
         this.resetStore(player1Store);
         this.resetStore(player2Store);
     }
 
     resetAllPits() {
-        let player1Row = document.querySelector(".row.player-1");
-        let player2Row = document.querySelector(".row.player-2");
+        let player1Row = document.querySelector(".row.player-one");
+        let player2Row = document.querySelector(".row.player-two");
 
         for (let i = 0; i < this.getModel().getSize(); i++) {
             const player1Pit = player1Row.children.item(i);
@@ -110,11 +110,11 @@ export class MancalaView {
         let store = undefined;
         let amount = undefined;
         if (storeNo === this.getModel().getSize()) {
-            store = document.querySelector(".store.player-1");
+            store = document.querySelector(".store.player-one");
 
             amount = this.getModel().getPlayer1Store();
         } else {
-            store = document.querySelector(".store.player-2");
+            store = document.querySelector(".store.player-two");
 
             amount = this.getModel().getPlayer2Store();
         }
@@ -123,17 +123,17 @@ export class MancalaView {
     }
 
     drawStores() {
-        let player1Store = document.querySelector(".store.player-1");
-        let player2Store = document.querySelector(".store.player-2");
+        let player1Store = document.querySelector(".store.player-one");
+        let player2Store = document.querySelector(".store.player-two");
 
         this.drawStore(player1Store, this.getModel().getPlayer1Store());
         this.drawStore(player2Store, this.getModel().getPlayer2Store());
     }
 
     drawAllPits() {
-        let player1Pits = document.querySelector(".row.player-1");
+        let player1Pits = document.querySelector(".row.player-one");
 
-        let player2Pits = document.querySelector(".row.player-2");
+        let player2Pits = document.querySelector(".row.player-two");
 
         let arr = this.getModel().getPlayer1Pits();
         for (let i = 0; i < arr.length; i++) {
