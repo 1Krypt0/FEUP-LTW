@@ -11,38 +11,90 @@
         <script type="module" src="js/modal/start-modal.js" defer></script>
         <script src="js/modal/instructions-modal.js" defer></script>
         <script src="./js/board.js" defer></script>
+        <script src="./js/modal/auth-modal.js" defer></script>
         <script type="module" src="./js/mvc/script.js"></script>
     </head>
     <body>
         <main id="main">
+            <section id="auth-modal" class="modal">
+                <article class="modal-content">
+                    <div class="authentication">
+                        <form id="login-form">
+                            <h2>Login</h2>
+                            <br />
+                            <div class="input-container">
+                                <input
+                                    type="text"
+                                    name="username-login"
+                                    id="username-login"
+                                />
+                                <label for="username-login">Username</label>
+                            </div>
+                            <div class="input-container">
+                                <input
+                                    type="password"
+                                    name="password-login"
+                                    id="password-login"
+                                />
+                                <label for="password-login">Password</label>
+                            </div>
+                            <br />
+                            <br />
+                            <button type="button" id="login-submit">
+                                Submit
+                            </button>
+                        </form>
+                        <form id="register-form">
+                            <h2>Register</h2>
+                            <br />
+                            <div class="input-container">
+                                <input
+                                    type="text"
+                                    name="username-register"
+                                    id="username-register"
+                                />
+                                <label for="username-register">Username</label>
+                            </div>
+                            <div class="input-container">
+                                <input
+                                    type="password"
+                                    name="password-register"
+                                    id="password-register"
+                                />
+                                <label for="password-register">Password</label>
+                            </div>
+                            <br />
+                            <br />
+                            <button type="button" id="register-submit">
+                                Submit
+                            </button>
+                        </form>
+                    </div>
+                </article>
+            </section>
+
             <section id="myModal" class="modal">
                 <article class="modal-content">
-                    <span class="modal-close" id="modal-close">&times;</span>
                     <form id="seed-form">
-                        <label for="pitNo"
-                            >Please enter the amount of pits on each side of the
-                            board:
-                        </label>
+                        <div class="input-container">
+                            <input
+                                type="number"
+                                name="pitNo"
+                                id="pitNo"
+                                placeholder="6"
+                            />
+                            <label for="pitNo"> Pits for each player </label>
+                        </div>
                         <br />
-                        <input
-                            type="number"
-                            name="pitNo"
-                            id="pitNo"
-                            placeholder="6"
-                        />
-                        <br />
-                        <label for="seedNo">
-                            Please enter the amount of seeds to start on each
-                            pit:
-                        </label>
-                        <br />
-                        <input
-                            type="number"
-                            name="seedNo"
-                            id="seedNo"
-                            placeholder="6"
-                        />
-
+                        <div class="input-container">
+                            <input
+                                type="number"
+                                name="seedNo"
+                                id="seedNo"
+                                placeholder="4"
+                            />
+                            <label for="seedNo"> Seeds on each pit </label>
+                        </div>
                         <br />
                         <br />
                         <button type="button" id="parameters">Submit</button>
