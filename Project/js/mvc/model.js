@@ -3,10 +3,10 @@ export class Mancala {
         this.size_ = size;
 
         this.currentPlayer_ = "one";
-        this.currentPits_ = Array(size).fill(seeds);
-        this.otherPits_ = Array(size).fill(seeds);
-        this.currentStore_ = 0;
-        this.otherStore_ = 0;
+        this.player1Pits_ = Array(size).fill(seeds);
+        this.player2Pits_ = Array(size).fill(seeds);
+        this.player1Store_ = 0;
+        this.player2Store_ = 0;
     }
 
     getCurrentPlayer() {
@@ -21,39 +21,39 @@ export class Mancala {
         return this.size_;
     }
 
-    getCurrentPits() {
-        return this.currentPits_;
+    getPlayer1Pits() {
+        return this.player1Pits_;
     }
 
-    getOtherPits() {
-        return this.otherPits_;
+    getPlayer2Pits() {
+        return this.player2Pits_;
     }
 
-    getCurrentStore() {
-        return this.currentStore_;
+    getPlayer1Store() {
+        return this.player1Store_;
     }
 
-    getOtherStore() {
-        return this.otherStore_;
+    getPlayer2Store() {
+        return this.player2Store_;
     }
 
-    getRightStoreIdx() {
+    getPlayer1StoreIdx() {
         return this.getSize();
     }
 
-    getLeftStoreIdx() {
+    getPlayer2StoreIdx() {
         return this.getSize() * 2 + 1;
     }
 
     getStones(pit) {
-        if (pit === this.getRightStoreIdx()) {
-            return this.currentStore_;
-        } else if (pit === this.getLeftStoreIdx()) {
-            return this.otherStore_;
+        if (pit === this.getPlayer1StoreIdx()) {
+            return this.player1Store_;
+        } else if (pit === this.getPlayer2StoreIdx()) {
+            return this.player2Store_;
         } else if (pit < this.getSize()) {
-            return this.currentPits_[pit];
+            return this.player1Pits_[pit];
         } else if (pit > this.getSize()) {
-            return this.otherPits_[pit - (this.getSize() + 1)];
+            return this.player2Pits_[pit - (this.getSize() + 1)];
         }
 
         return NaN;
@@ -63,43 +63,43 @@ export class Mancala {
         this.currentPlayer_ = player;
     }
 
-    setCurrentPits(pits) {
-        this.currentPits_ = pits;
+    setPlayer1Pits(pits) {
+        this.player1Pits_ = pits;
     }
 
-    setOtherPits(pits) {
-        this.otherPits_ = pits;
+    setPlayer2Pits(pits) {
+        this.player2Pits_ = pits;
     }
 
-    setCurrentStore(store) {
-        this.currentStore_ = store;
+    setPlayer1Store(store) {
+        this.player1Store_ = store;
     }
 
-    setOtherStore(store) {
-        this.otherStore_ = store;
+    setPlayer2Store(store) {
+        this.player2Store_ = store;
     }
 
     setStones(pit, stones) {
-        if (pit === this.getRightStoreIdx()) {
-            this.currentStore_ = stones;
-        } else if (pit === this.getLeftStoreIdx()) {
-            this.otherStore_ = stones;
+        if (pit === this.getPlayer1StoreIdx()) {
+            this.player1Store_ = stones;
+        } else if (pit === this.getPlayer2StoreIdx()) {
+            this.player2Store_ = stones;
         } else if (pit < this.getSize()) {
-            this.currentPits_[pit] = stones;
+            this.player1Pits_[pit] = stones;
         } else if (pit > this.getSize()) {
-            this.otherPits_[pit - (this.getSize() + 1)] = stones;
+            this.player2Pits_[pit - (this.getSize() + 1)] = stones;
         }
     }
 
     addStones(pit, stones) {
-        if (pit === this.getRightStoreIdx()) {
-            this.currentStore_ += stones;
-        } else if (pit === this.getLeftStoreIdx()) {
-            this.otherStore_[pit] += stones;
+        if (pit === this.getPlayer1StoreIdx()) {
+            this.player1Store_ += stones;
+        } else if (pit === this.getPlayer2StoreIdx()) {
+            this.player2Store_ += stones;
         } else if (pit < this.getSize()) {
-            this.currentPits_[pit] += stones;
+            this.player1Pits_[pit] += stones;
         } else if (pit > 6) {
-            this.otherPits_[pit - (this.getSize() + 1)] += stones;
+            this.player2Pits_[pit - (this.getSize() + 1)] += stones;
         }
     }
 }
