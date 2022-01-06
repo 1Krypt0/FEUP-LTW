@@ -146,8 +146,10 @@ export class MancalaController {
             this.getModel().getStones(pit) === 1
         ) {
             let inverse = this.getModel().getSize() - 1 - pit;
-            console.log("Inverse is " + inverse);
             let seeds = this.getModel().getPlayer2Pits()[inverse];
+            if (seeds === 0) {
+                return true;
+            }
             this.getModel().setPlayer1Store(
                 this.getModel().getPlayer1Store() + seeds + 1
             );
@@ -171,7 +173,9 @@ export class MancalaController {
         ) {
             let inverse = 2 * this.getModel().getSize() - pit;
             let seeds = this.getModel().getPlayer1Pits()[inverse];
-            console.log("Inverse is " + inverse + " and seeds are " + seeds);
+            if (seeds === 0) {
+                return true;
+            }
             this.getModel().setPlayer2Store(
                 this.getModel().getPlayer2Store() + seeds + 1
             );
