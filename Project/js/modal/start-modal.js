@@ -35,11 +35,3 @@ function setGame(seedAmount, pitAmount) {
     board.render();
     playGame(pitAmount, seedAmount);
 }
-
-window.onload = function () {
-    startModal.style.display = "block";
-};
-
-startModalCloser.onclick = function () {
-    startModal.style.display = "none";
-};
