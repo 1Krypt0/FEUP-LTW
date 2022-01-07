@@ -8,7 +8,7 @@ function login() {
     let response = request.sendRequest();
 
     response.then(function (result) {
-        processResult(result);
+        processLogin(result);
     });
 }
 
@@ -24,10 +24,9 @@ function getLoginUserData() {
     return data;
 }
 
-function processResult(result) {
+function processLogin(result) {
     const authModal = document.getElementById("auth-modal");
     const paramsModal = document.getElementById("myModal");
-    console.log(result);
     if (isEmpty(result)) {
         authModal.style.display = "none";
         paramsModal.style.display = "block";

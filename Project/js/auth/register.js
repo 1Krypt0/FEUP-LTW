@@ -5,9 +5,25 @@ const registerButton = document.getElementById("register-submit");
 function register() {
     const request = new MyRequest("POST", "register", getRegisterUserData());
 
-    request.sendRequest();
+    let response = request.sendRequest();
 
-    if (request.getResponse() !== "") {
+    response.then(function (result) {
+        processRegister(result);
+    });
+}
+
+function processRegister(result) {
+    const authModal = document.getElementById("auth-modal");
+    const paramsModal = document.getElementById("myModal");
+    if (isEmpty(result)) {
+        authModal.style.display = "none";
+        paramsModal.style.display = "block";
+    } else {
+        const form = document.getElementById("register-form");
+        const error = document.createElement("span");
+        error.innerHTML = "Username already exists!";
+
+        form.appendChild(error);
     }
 }
 
@@ -21,6 +37,10 @@ function getRegisterUserData() {
     };
 
     return data;
+}
+
+function isEmpty(obj) {
+    return Object.keys(obj).length === 0;
 }
 
 registerButton.onclick = register;
