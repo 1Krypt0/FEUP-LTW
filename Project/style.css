@@ -104,15 +104,17 @@ header > h1 {
     cursor: default;
     position: relative;
 }
-.tracker {
+
+.pitAndTracker {
     flex: 1;
     border-radius: 40%;
     position: relative;
 }
+
 .pit {
-    flex: 1;
+    width: 80%;
+    height: 80%;
     border-radius: 40%;
-    position: relative;
 }
 [data-player="one"] .row.player-one .pit,
 [data-player="two"] .row.player-two .pit {

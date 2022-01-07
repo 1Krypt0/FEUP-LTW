@@ -52,6 +52,12 @@ export function playGame(size, seeds) {
         }
     };
 
-    bindPitsAction("one", document.querySelectorAll(".row.player-one .pit"));
-    bindPitsAction("two", document.querySelectorAll(".row.player-two .pit"));
+    bindPitsAction(
+        "one",
+        document.querySelectorAll(".row.player-one .pitAndTracker")
+    );
+    bindPitsAction(
+        "two",
+        document.querySelectorAll(".row.player-two .pitAndTracker")
+    );
 }

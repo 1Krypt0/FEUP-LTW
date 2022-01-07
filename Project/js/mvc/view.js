@@ -30,10 +30,12 @@ export class MancalaView {
         let pit = undefined;
         if (pitNo < this.getModel().getSize()) {
             row = document.querySelector(".row.player-one");
-            pit = row.children.item(pitNo);
+            pit = row.children.item(pitNo).firstChild;
         } else {
             row = document.querySelector(".row.player-two");
-            pit = row.children.item(pitNo - this.getModel().getSize() - 1);
+            pit = row.children.item(
+                pitNo - this.getModel().getSize() - 1
+            ).firstChild;
         }
         this.resetPit(pit);
     }
@@ -45,7 +47,7 @@ export class MancalaView {
         if (pitNo < this.getModel().getSize()) {
             row = document.querySelector(".row.player-one");
             amount = this.getModel().getPlayer1Pits()[pitNo];
-            pit = row.children.item(pitNo);
+            pit = row.children.item(pitNo).firstChild;
         } else {
             row = document.querySelector(".row.player-two");
             amount =
@@ -53,7 +55,9 @@ export class MancalaView {
                     pitNo - this.getModel().getSize() - 1
                 ];
 
-            pit = row.children.item(pitNo - this.getModel().getSize() - 1);
+            pit = row.children.item(
+                pitNo - this.getModel().getSize() - 1
+            ).firstChild;
         }
 
         this.drawPit(pit, amount);
@@ -94,8 +98,8 @@ export class MancalaView {
         let player2Row = document.querySelector(".row.player-two");
 
         for (let i = 0; i < this.getModel().getSize(); i++) {
-            const player1Pit = player1Row.children.item(i);
-            const player2Pit = player2Row.children.item(i);
+            const player1Pit = player1Row.children.item(i).firstChild;
+            const player2Pit = player2Row.children.item(i).firstChild;
             this.resetPit(player1Pit);
             this.resetPit(player2Pit);
         }
@@ -137,13 +141,14 @@ export class MancalaView {
 
         let arr = this.getModel().getPlayer1Pits();
         for (let i = 0; i < arr.length; i++) {
-            const pit = player1Pits.children.item(i);
+            const pit = player1Pits.children.item(i).firstChild;
+            console.log(pit);
             this.drawPit(pit, arr[i]);
         }
 
         arr = this.getModel().getPlayer2Pits();
         for (let i = 0; i < arr.length; i++) {
-            const pit = player2Pits.children.item(i);
+            const pit = player2Pits.children.item(i).firstChild;
             this.drawPit(pit, arr[i]);
         }
     }
