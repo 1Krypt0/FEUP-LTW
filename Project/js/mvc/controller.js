@@ -169,6 +169,7 @@ export class MancalaController {
         if (
             this.getModel().getCurrentPlayer() === "two" &&
             pit > this.getModel().getSize() &&
+            pit != this.getModel().getPlayer2StoreIdx() &&
             this.getModel().getStones(pit) === 1
         ) {
             let inverse = 2 * this.getModel().getSize() - pit;
