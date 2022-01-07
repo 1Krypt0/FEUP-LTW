@@ -107,6 +107,7 @@ header > h1 {
 
 .pitAndTracker {
     flex: 1;
+    display: flex;
     border-radius: 40%;
     position: relative;
 }

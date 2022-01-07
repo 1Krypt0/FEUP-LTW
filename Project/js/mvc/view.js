@@ -25,29 +25,48 @@ export class MancalaView {
         }
     }
 
+    resetTracker(tracker) {
+        if (tracker == null) {
+            return;
+        }
+        tracker.innerHTML = "0";
+    }
+
+    drawTracker(tracker, amount) {
+        tracker.innerHTML = amount;
+    }
+
     resetPitNo(pitNo) {
         let row = undefined;
         let pit = undefined;
+        let tracker = undefined;
         if (pitNo < this.getModel().getSize()) {
             row = document.querySelector(".row.player-one");
             pit = row.children.item(pitNo).firstChild;
+            tracker = row.children.item(pitNo).lastChild;
         } else {
             row = document.querySelector(".row.player-two");
             pit = row.children.item(
                 pitNo - this.getModel().getSize() - 1
             ).firstChild;
+            tracker = row.children.item(
+                pitNo - this.getModel().getSize() - 1
+            ).lastChild;
         }
         this.resetPit(pit);
+        this.resetTracker(tracker);
     }
 
     drawPitNo(pitNo) {
         let row = undefined;
         let amount = undefined;
         let pit = undefined;
+        let tracker = undefined;
         if (pitNo < this.getModel().getSize()) {
             row = document.querySelector(".row.player-one");
             amount = this.getModel().getPlayer1Pits()[pitNo];
             pit = row.children.item(pitNo).firstChild;
+            tracker = row.children.item(pitNo).lastChild;
         } else {
             row = document.querySelector(".row.player-two");
             amount =
@@ -58,9 +77,13 @@ export class MancalaView {
             pit = row.children.item(
                 pitNo - this.getModel().getSize() - 1
             ).firstChild;
+            tracker = row.children.item(
+                pitNo - this.getModel().getSize() - 1
+            ).lastChild;
         }
 
         this.drawPit(pit, amount);
+        this.drawTracker(tracker, amount);
     }
 
     resetStore(store) {
@@ -99,9 +122,13 @@ export class MancalaView {
 
         for (let i = 0; i < this.getModel().getSize(); i++) {
             const player1Pit = player1Row.children.item(i).firstChild;
+            const player1Tracker = player1Row.children.item(i).lastChild;
             const player2Pit = player2Row.children.item(i).firstChild;
+            const player2Tracker = player2Row.children.item(i).lastChild;
             this.resetPit(player1Pit);
             this.resetPit(player2Pit);
+            this.resetTracker(player1Tracker);
+            this.resetTracker(player2Tracker);
         }
     }
 
@@ -142,14 +169,17 @@ export class MancalaView {
         let arr = this.getModel().getPlayer1Pits();
         for (let i = 0; i < arr.length; i++) {
             const pit = player1Pits.children.item(i).firstChild;
-            console.log(pit);
+            const tracker = player1Pits.children.item(i).lastChild;
             this.drawPit(pit, arr[i]);
+            this.drawTracker(tracker, arr[i]);
         }
 
         arr = this.getModel().getPlayer2Pits();
         for (let i = 0; i < arr.length; i++) {
             const pit = player2Pits.children.item(i).firstChild;
+            const tracker = player2Pits.children.item(i).lastChild;
             this.drawPit(pit, arr[i]);
+            this.drawTracker(tracker, arr[i]);
         }
     }
 
