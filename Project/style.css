@@ -253,7 +253,6 @@ button {
     padding: 9px 20px 8px;
     position: relative;
     text-align: center;
-    touch-action: manipulation;
     cursor: pointer;
     width: 100%;
 }

@@ -10,17 +10,16 @@
         <link rel="stylesheet" href="style.css" />
         <script type="module" src="js/modal/start-modal.js" defer></script>
         <script src="js/modal/instructions-modal.js" defer></script>
-        <script src="./js/board.js" defer></script>
         <script src="./js/modal/auth-modal.js" defer></script>
-        <script type="module" src="./js/mvc/script.js"></script>
-        <script src="./js/requests.js" defer></script>
+        <script type="module" src="./js/auth/login.js" defer></script>
+        <script type="module" src="./js/auth/register.js" defer></script>
     </head>
     <body>
         <main id="main">
             <section id="auth-modal" class="modal">
                 <article class="modal-content">
                     <div class="authentication">
-                        <form id="login-form">
+                        <form method="post" id="login-form">
                             <h2>Login</h2>
                             <br />
                             <div class="input-container">
@@ -45,7 +44,7 @@
                                 Submit
                             </button>
                         </form>
-                        <form id="register-form">
+                        <form method="post" id="register-form">
                             <h2>Register</h2>
                             <br />
                             <div class="input-container">
