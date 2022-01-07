@@ -32,6 +32,11 @@ function processResult(result) {
         authModal.style.display = "none";
         paramsModal.style.display = "block";
     } else {
+        const form = document.getElementById("login-form");
+        const error = document.createElement("span");
+        error.innerHTML = "Wrong username and Password combination";
+
+        form.appendChild(error);
     }
 }
 
