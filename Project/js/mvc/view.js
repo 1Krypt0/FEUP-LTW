@@ -111,9 +111,13 @@ export class MancalaView {
     resetAllStores() {
         let player1Store = document.querySelector(".store.player-one");
         let player2Store = document.querySelector(".store.player-two");
+        let player1StoreTracker = document.querySelector(".player-one.tracker");
+        let player2StoreTracker = document.querySelector(".player-two.tracker");
 
         this.resetStore(player1Store);
         this.resetStore(player2Store);
+        this.resetTracker(player1StoreTracker);
+        this.resetTracker(player2StoreTracker);
     }
 
     resetAllPits() {
@@ -140,25 +144,38 @@ export class MancalaView {
     drawStoreNo(storeNo) {
         let store = undefined;
         let amount = undefined;
+        let tracker = undefined;
         if (storeNo === this.getModel().getSize()) {
             store = document.querySelector(".store.player-one");
-
+            tracker = document.querySelector(".tracker.player-one");
             amount = this.getModel().getPlayer1Store();
         } else {
             store = document.querySelector(".store.player-two");
-
+            tracker = document.querySelector(".tracker.player-two");
             amount = this.getModel().getPlayer2Store();
         }
 
         this.drawStore(store, amount);
+        this.drawTracker(tracker, amount);
     }
 
     drawStores() {
         let player1Store = document.querySelector(".store.player-one");
         let player2Store = document.querySelector(".store.player-two");
+        let player1StoreTracker = document.querySelector(".tracker.player-one");
+        let player2StoreTracker = document.querySelector(".tracker.player-two");
 
         this.drawStore(player1Store, this.getModel().getPlayer1Store());
         this.drawStore(player2Store, this.getModel().getPlayer2Store());
+
+        this.drawTracker(
+            player1StoreTracker,
+            this.getModel().getPlayer1Store()
+        );
+        this.drawTracker(
+            player2StoreTracker,
+            this.getModel().getPlayer2Store()
+        );
     }
 
     drawAllPits() {

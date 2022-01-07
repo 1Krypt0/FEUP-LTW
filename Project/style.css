@@ -70,6 +70,9 @@ header > h1 {
 
 .board {
     margin: 50px auto;
+    padding-left: 1rem;
+    padding-right: 1rem;
+    padding-top: 1rem;
     display: flex;
     flex-flow: row;
     width: 50vw;
@@ -105,11 +108,18 @@ header > h1 {
     position: relative;
 }
 
-.pitAndTracker {
+.pitAndTracker,
+.storeAndTracker {
     flex: 1;
     display: flex;
     border-radius: 40%;
     position: relative;
+}
+
+.tracker.player-one,
+.tracker.player-two {
+    display: flex;
+    align-items: center;
 }
 
 .pit {
@@ -117,6 +127,10 @@ header > h1 {
     height: 80%;
     border-radius: 40%;
 }
+.store {
+    width: 80%;
+}
+
 [data-player="one"] .row.player-one .pit,
 [data-player="two"] .row.player-two .pit {
     cursor: pointer;
