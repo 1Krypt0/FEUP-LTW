@@ -16,6 +16,11 @@ function processRegister(result) {
     const authModal = document.getElementById("auth-modal");
     const paramsModal = document.getElementById("myModal");
     if (isEmpty(result)) {
+        const navbar = document.getElementById("navbar");
+        let name = document.createElement("li");
+        name.innerHTML = "<h2>" + getRegisterUserData().nick + "</h2>";
+        navbar.appendChild(name);
+
         authModal.style.display = "none";
         paramsModal.style.display = "block";
     } else {
@@ -28,8 +33,8 @@ function processRegister(result) {
 }
 
 function getRegisterUserData() {
-    const username = document.getElementById("username-login");
-    const password = document.getElementById("password-login");
+    const username = document.getElementById("username-register");
+    const password = document.getElementById("password-register");
 
     const data = {
         nick: username.value,

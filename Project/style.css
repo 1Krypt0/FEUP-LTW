@@ -68,6 +68,10 @@ header > h1 {
     color: #d70026;
 }
 
+li > h2 {
+    color: #d70026;
+}
+
 .board {
     margin: 50px auto;
     padding-left: 1rem;
