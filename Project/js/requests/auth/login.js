@@ -2,6 +2,9 @@ import { MyRequest } from "../requests.js";
 
 const loginButton = document.getElementById("login-submit");
 
+let nick = null;
+let pass = null;
+
 function login() {
     const request = new MyRequest("POST", "register", getLoginUserData());
 
@@ -21,6 +24,9 @@ function getLoginUserData() {
         password: password.value,
     };
 
+    nick = username.value;
+    pass = password.value;
+
     return data;
 }
 
@@ -33,7 +39,6 @@ function processLogin(result) {
         name.innerHTML = "<h2>" + getLoginUserData().nick + "</h2>";
         navbar.appendChild(name);
 
-        console.log(navbar.children);
         authModal.style.display = "none";
         paramsModal.style.display = "block";
     } else {
@@ -50,3 +55,5 @@ function isEmpty(obj) {
 }
 
 loginButton.onclick = login;
+
+export { nick, pass };

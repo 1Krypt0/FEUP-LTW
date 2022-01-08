@@ -34,4 +34,4 @@ class MyRequest {
     }
 }
 
-export { MyRequest, URL };
+export { MyRequest };
