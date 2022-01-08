@@ -56,4 +56,4 @@ function isEmpty(obj) {
 
 loginButton.onclick = login;
 
-export { nick, pass };
+export { nick, pass, isEmpty };

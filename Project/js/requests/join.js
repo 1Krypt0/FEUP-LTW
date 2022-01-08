@@ -52,3 +52,5 @@ function setGame(seedAmount, pitAmount) {
 }
 
 paramsButton.onclick = join;
+
+export { GAME_ID };
