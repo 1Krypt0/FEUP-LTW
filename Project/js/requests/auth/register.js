@@ -1,4 +1,5 @@
 import { MyRequest } from "../requests.js";
+import { nick, pass } from "./login.js";
 
 const registerButton = document.getElementById("register-submit");
 
@@ -40,6 +41,9 @@ function getRegisterUserData() {
         nick: username.value,
         password: password.value,
     };
+
+    nick = username.value;
+    pass = password.value;
 
     return data;
 }
