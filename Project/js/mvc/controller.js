@@ -55,10 +55,11 @@ export class MancalaController {
                 .getElementsByTagName("section")
                 .item(0)
                 .setAttribute("data-player", currentPlayer);
-            let player = document.querySelector(".current-player").textContent;
-            if (player === "one") {
+            let player = document.querySelector(".current-player");
+            if (player === null) return;
+            if (player.textContent === "one") {
                 document.querySelector(".current-player").textContent = "two";
-            } else if (player === "two") {
+            } else if (player.textContent === "two") {
                 document.querySelector(".current-player").textContent = "one";
             }
         }, 500);
@@ -104,8 +105,6 @@ export class MancalaController {
 
         while (stones > 0) {
             ++pit;
-            console.log("pit is now " + pit);
-            console.log(this.getModel().getSize() * 2);
             // wrap around the board before reaching other player's store
             if (
                 (pit > this.getModel().getSize() * 2 &&
@@ -121,12 +120,7 @@ export class MancalaController {
                 pit++;
             }
 
-            console.log("Pit is now " + pit);
-
             this.getModel().addStones(pit, 1);
-            console.log(
-                "pit " + pit + " now has " + this.getModel().getStones(pit)
-            );
             stones--;
 
             if (
