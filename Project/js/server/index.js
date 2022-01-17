@@ -1,19 +1,38 @@
 const http = require("http");
 const PORT = 9047;
 
-const server = http.createServer((request, response) => {
-  switch (request.method) {
-    case "GET":
-      handleGET(request, response);
-      break;
-    case "POST":
-      handlePOST(request, response);
-      break;
-    default:
-      response.writeHead(404, "Unknown Request.");
-      break;
-  }
-  response.end();
-});
+class Server {
+  constructor() {}
 
-server.listen(PORT);
+  getServer() {
+    return this.server;
+  }
+
+  initServer() {
+    this.server = http.createServer((request, response) => {
+      switch (request.method) {
+        case "GET":
+          this.handleGET(request, response);
+          break;
+        case "POST":
+          this.handlePOST(request, response);
+          break;
+        default:
+          response.writeHead(404, "Unknown Request.");
+          break;
+      }
+      response.end();
+    });
+  }
+
+  listen() {
+    this.server.listen(PORT);
+  }
+
+  handleGET(req, res) {
+    switch (req.url) {
+    }
+  }
+
+  handlePOST(req, res) {}
+}
