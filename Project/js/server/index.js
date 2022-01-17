@@ -37,14 +37,36 @@ class Server {
         break;
       default:
         const error = {
-          error: "Invalid GET request",
+          error: "Invalid GET Request",
         };
         res.write(JSON.stringify(error));
     }
   }
 
   handlePOST(req, res) {
-    console.log(req.method);
+    const url = req.url.split("?")[0];
+    switch (url) {
+      case "/join":
+        handleJoin();
+        break;
+      case "/leave":
+        handleLeave();
+        break;
+      case "/notify":
+        handleNotify();
+        break;
+      case "/ranking":
+        handleRanking();
+        break;
+      case "/register":
+        handleRegister();
+        break;
+      default:
+        const error = {
+          error: "Invalid POST Request",
+        };
+        res.write(JSON.stringify(error));
+    }
   }
 }
 
