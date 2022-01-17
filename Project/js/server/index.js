@@ -30,9 +30,24 @@ class Server {
   }
 
   handleGET(req, res) {
-    switch (req.url) {
+    const url = req.url.split("?")[0];
+    switch (url) {
+      case "/update":
+        handleUpdate();
+        break;
+      default:
+        const error = {
+          error: "Invalid GET request",
+        };
+        res.write(JSON.stringify(error));
     }
   }
 
-  handlePOST(req, res) {}
+  handlePOST(req, res) {
+    console.log(req.method);
+  }
 }
+
+const server = new Server();
+server.initServer();
+server.listen(PORT);
