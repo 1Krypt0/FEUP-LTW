@@ -1,6 +1,5 @@
 import { SeedView } from "./viewers/seedview.js";
 
-//TODO: Divide into more granular views.
 export class MancalaView {
     constructor(model) {
         this.model_ = model;
@@ -12,6 +11,9 @@ export class MancalaView {
     }
 
     resetPit(pit) {
+        if (pit === null) {
+            return;
+        }
         while (pit.children.length != 0) {
             pit.removeChild(pit.firstChild);
         }
@@ -23,47 +25,65 @@ export class MancalaView {
         }
     }
 
+    resetTracker(tracker) {
+        if (tracker == null) {
+            return;
+        }
+        tracker.innerHTML = "0";
+    }
+
+    drawTracker(tracker, amount) {
+        tracker.innerHTML = amount;
+    }
+
     resetPitNo(pitNo) {
         let row = undefined;
         let pit = undefined;
+        let tracker = undefined;
         if (pitNo < this.getModel().getSize()) {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getCurrentPlayer()
-            );
-
-            pit = row.children.item(pitNo);
+            row = document.querySelector(".row.player-one");
+            pit = row.children.item(pitNo).firstChild;
+            tracker = row.children.item(pitNo).lastChild;
         } else {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getOtherPlayer()
-            );
-            pit = row.children.item(pitNo - this.getModel().getSize() - 1);
+            row = document.querySelector(".row.player-two");
+            pit = row.children.item(
+                pitNo - this.getModel().getSize() - 1
+            ).firstChild;
+            tracker = row.children.item(
+                pitNo - this.getModel().getSize() - 1
+            ).lastChild;
         }
         this.resetPit(pit);
+        this.resetTracker(tracker);
     }
 
     drawPitNo(pitNo) {
         let row = undefined;
         let amount = undefined;
         let pit = undefined;
+        let tracker = undefined;
         if (pitNo < this.getModel().getSize()) {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getCurrentPlayer()
-            );
-            amount = this.getModel().getCurrentPits()[pitNo];
-            pit = row.children.item(pitNo);
+            row = document.querySelector(".row.player-one");
+            amount = this.getModel().getPlayer1Pits()[pitNo];
+            pit = row.children.item(pitNo).firstChild;
+            tracker = row.children.item(pitNo).lastChild;
         } else {
-            row = document.querySelector(
-                ".row.player-" + this.getModel().getOtherPlayer()
-            );
+            row = document.querySelector(".row.player-two");
             amount =
-                this.getModel().getOtherPits()[
+                this.getModel().getPlayer2Pits()[
                     pitNo - this.getModel().getSize() - 1
                 ];
 
-            pit = row.children.item(pitNo - this.getModel().getSize() - 1);
+            pit = row.children.item(
+                pitNo - this.getModel().getSize() - 1
+            ).firstChild;
+            tracker = row.children.item(
+                pitNo - this.getModel().getSize() - 1
+            ).lastChild;
         }
 
         this.drawPit(pit, amount);
+        this.drawTracker(tracker, amount);
     }
 
     resetStore(store) {
@@ -80,43 +100,39 @@ export class MancalaView {
 
     resetStoreNo(store) {
         if (store === this.getModel().getSize()) {
-            store = document.querySelector(
-                ".store.player-" + this.getModel().getCurrentPlayer()
-            );
+            store = document.querySelector(".store.player-one");
         } else {
-            store = document.querySelector(
-                ".store.player-" + this.getModel().getOtherPlayer()
-            );
+            store = document.querySelector(".store.player-two");
         }
 
         this.resetStore(store);
     }
 
     resetAllStores() {
-        let currentPlayerStore = document.querySelector(
-            ".store.player-" + this.getModel().getCurrentPlayer()
-        );
-        let otherPlayerStore = document.querySelector(
-            ".store.player-" + this.getModel().getOtherPlayer()
-        );
+        let player1Store = document.querySelector(".store.player-one");
+        let player2Store = document.querySelector(".store.player-two");
+        let player1StoreTracker = document.querySelector(".player-one.tracker");
+        let player2StoreTracker = document.querySelector(".player-two.tracker");
 
-        this.resetStore(currentPlayerStore);
-        this.resetStore(otherPlayerStore);
+        this.resetStore(player1Store);
+        this.resetStore(player2Store);
+        this.resetTracker(player1StoreTracker);
+        this.resetTracker(player2StoreTracker);
     }
 
     resetAllPits() {
-        let currentRowPit = document.querySelector(
-            ".row.player-" + this.getModel().getCurrentPlayer()
-        );
-        let otherRowPit = document.querySelector(
-            ".row.player-" + this.getModel().getOtherPlayer()
-        );
+        let player1Row = document.querySelector(".row.player-one");
+        let player2Row = document.querySelector(".row.player-two");
 
         for (let i = 0; i < this.getModel().getSize(); i++) {
-            const currentPlayerPit = currentRowPit.children.item(i);
-            const otherPlayerPit = otherRowPit.children.item(i);
-            this.resetPit(currentPlayerPit);
-            this.resetPit(otherPlayerPit);
+            const player1Pit = player1Row.children.item(i).firstChild;
+            const player1Tracker = player1Row.children.item(i).lastChild;
+            const player2Pit = player2Row.children.item(i).firstChild;
+            const player2Tracker = player2Row.children.item(i).lastChild;
+            this.resetPit(player1Pit);
+            this.resetPit(player2Pit);
+            this.resetTracker(player1Tracker);
+            this.resetTracker(player2Tracker);
         }
     }
 
@@ -128,54 +144,59 @@ export class MancalaView {
     drawStoreNo(storeNo) {
         let store = undefined;
         let amount = undefined;
+        let tracker = undefined;
         if (storeNo === this.getModel().getSize()) {
-            store = document.querySelector(
-                ".store.player-" + this.getModel().getCurrentPlayer()
-            );
-
-            amount = this.getModel().getCurrentStore();
+            store = document.querySelector(".store.player-one");
+            tracker = document.querySelector(".tracker.player-one");
+            amount = this.getModel().getPlayer1Store();
         } else {
-            store = document.querySelector(
-                ".store.player-" + this.getModel().getOtherPlayer()
-            );
-
-            amount = this.getModel().getOtherStore();
+            store = document.querySelector(".store.player-two");
+            tracker = document.querySelector(".tracker.player-two");
+            amount = this.getModel().getPlayer2Store();
         }
 
         this.drawStore(store, amount);
+        this.drawTracker(tracker, amount);
     }
 
     drawStores() {
-        let currentPlayerStore = document.querySelector(
-            ".store.player-" + this.getModel().getCurrentPlayer()
-        );
-        let otherPlayerStore = document.querySelector(
-            ".store.player-" + this.getModel().getOtherPlayer()
-        );
+        let player1Store = document.querySelector(".store.player-one");
+        let player2Store = document.querySelector(".store.player-two");
+        let player1StoreTracker = document.querySelector(".tracker.player-one");
+        let player2StoreTracker = document.querySelector(".tracker.player-two");
 
-        this.drawStore(currentPlayerStore, this.getModel().getCurrentStore());
-        this.drawStore(otherPlayerStore, this.getModel().getOtherStore());
+        this.drawStore(player1Store, this.getModel().getPlayer1Store());
+        this.drawStore(player2Store, this.getModel().getPlayer2Store());
+
+        this.drawTracker(
+            player1StoreTracker,
+            this.getModel().getPlayer1Store()
+        );
+        this.drawTracker(
+            player2StoreTracker,
+            this.getModel().getPlayer2Store()
+        );
     }
 
     drawAllPits() {
-        let currentRowPit = document.querySelector(
-            ".row.player-" + this.getModel().getCurrentPlayer()
-        );
+        let player1Pits = document.querySelector(".row.player-one");
 
-        let otherRowPit = document.querySelector(
-            ".row.player-" + this.getModel().getOtherPlayer()
-        );
+        let player2Pits = document.querySelector(".row.player-two");
 
-        let arr = this.getModel().getCurrentPits();
+        let arr = this.getModel().getPlayer1Pits();
         for (let i = 0; i < arr.length; i++) {
-            const pit = currentRowPit.children.item(i);
+            const pit = player1Pits.children.item(i).firstChild;
+            const tracker = player1Pits.children.item(i).lastChild;
             this.drawPit(pit, arr[i]);
+            this.drawTracker(tracker, arr[i]);
         }
 
-        arr = this.getModel().getOtherPits();
+        arr = this.getModel().getPlayer2Pits();
         for (let i = 0; i < arr.length; i++) {
-            const pit = otherRowPit.children.item(i);
+            const pit = player2Pits.children.item(i).firstChild;
+            const tracker = player2Pits.children.item(i).lastChild;
             this.drawPit(pit, arr[i]);
+            this.drawTracker(tracker, arr[i]);
         }
     }
 

@@ -2,9 +2,9 @@ import { MancalaController } from "./controller.js";
 import { MancalaView } from "./view.js";
 import { Mancala } from "./model.js";
 
-class Game {
-    constructor(size) {
-        this.model_ = new Mancala(size);
+export class Game {
+    constructor(size, seeds) {
+        this.model_ = new Mancala(size, seeds);
         this.view_ = new MancalaView(this.model_);
         this.controller_ = new MancalaController(this.model_, this.view_);
     }
@@ -26,8 +26,8 @@ class Game {
     }
 }
 
-function playGame() {
-    let game = new Game(6);
+export function playGame(size, seeds) {
+    let game = new Game(size, seeds);
     let waitingForMove = true;
 
     game.init();
@@ -39,7 +39,7 @@ function playGame() {
                 waitingForMove
             ) {
                 waitingForMove = false;
-                let pit = this; //parseInt(this.getAttribute("data-pit"));
+                let pit = this;
                 if (!game.getController().doPlayerTurn(pit)) {
                     waitingForMove = true;
                 }
@@ -52,8 +52,12 @@ function playGame() {
         }
     };
 
-    bindPitsAction("one", document.querySelectorAll(".row.player-one .pit"));
-    bindPitsAction("two", document.querySelectorAll(".row.player-two .pit"));
+    bindPitsAction(
+        "one",
+        document.querySelectorAll(".row.player-one .pitAndTracker")
+    );
+    bindPitsAction(
+        "two",
+        document.querySelectorAll(".row.player-two .pitAndTracker")
+    );
 }
-
-playGame();
