@@ -7,9 +7,9 @@ let instructionsButton = document.getElementById("instructions");
 let instructionsCloser = document.getElementById("instructions-modal-close");
 
 instructionsButton.onclick = function () {
-    instructionsModal.style.display = "block";
+  instructionsModal.style.display = "block";
 };
 
 instructionsCloser.onclick = function () {
-    instructionsModal.style.display = "none";
+  instructionsModal.style.display = "none";
 };
