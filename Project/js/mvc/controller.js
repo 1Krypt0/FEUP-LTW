@@ -242,7 +242,7 @@ export class MancalaController {
   }
 
     addScore() {
-        const scores = document.getElementById("scores");
+        let scores = document.getElementById("scores");
         let newscore=document.createElement('li');
         newscore.innerHTML= this.getScore(1)+"-"+this.getScore(2);
         scores.appendChild(newscore);
@@ -252,8 +252,9 @@ export class MancalaController {
         //relative to user, when user registers, nr_games is put to 0
         this.addScore();
         let username=document.getElementById("username").innerHTML;
-        localStorage.setItem(username+"-"+"nr_games", localStorage.getItem("nr_games")+1);
-        localStorage.setItem(username+"-"+"g"+"-"+this.getScore(1)+"-"+this.getScore(2));
+        let ngame = localStorage.getItem("nr_games")+1;
+        localStorage.setItem(username+"-nr_games", ngame);
+        localStorage.setItem(username+"-g-"+ngame,localStorage.getItem,this.getScore(1)+"-"+this.getScore(2));
     }
 
 }
