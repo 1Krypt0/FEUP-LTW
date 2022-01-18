@@ -1,3 +1,4 @@
+const { log } = require("console");
 const http = require("http");
 const register = require("./handlers/register");
 const PORT = 9047;
@@ -21,7 +22,7 @@ class Server {
             body += chunk;
           });
           request.on("end", () => {
-            this.handlePOST(request, body);
+            this.handlePOST(request, response, body);
           });
           break;
         default:
@@ -50,7 +51,7 @@ class Server {
     }
   }
 
-  handlePOST(req, body) {
+  handlePOST(req, res, body) {
     const url = req.url.split("?")[0];
     switch (url) {
       case "/join":
@@ -66,7 +67,9 @@ class Server {
         handleRanking();
         break;
       case "/register":
-        register.handleRegister(body);
+        let response = register.handleRegister(body);
+        res.write(JSON.stringify(response));
+        console.log(JSON.stringify(response));
         break;
       default:
         const error = {
