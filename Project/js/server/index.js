@@ -1,4 +1,3 @@
-const { log } = require("console");
 const http = require("http");
 const register = require("./handlers/register");
 const PORT = 9047;
