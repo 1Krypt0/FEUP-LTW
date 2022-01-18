@@ -240,4 +240,20 @@ export class MancalaController {
       return 0;
     }
   }
+
+    addScore() {
+        const scores = document.getElementById("scores");
+        let newscore=document.createElement('li');
+        newscore.innerHTML= this.getScore(1)+"-"+this.getScore(2);
+        scores.appendChild(newscore);
+    }
+
+    addScoreStorage() {
+        //relative to user, when user registers, nr_games is put to 0
+        this.addScore();
+        let username=document.getElementById("username").innerHTML;
+        localStorage.setItem(username+"-"+"nr_games", localStorage.getItem("nr_games")+1);
+        localStorage.setItem(username+"-"+"g"+"-"+this.getScore(1)+"-"+this.getScore(2));
+    }
+
 }

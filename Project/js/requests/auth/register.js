@@ -11,6 +11,8 @@ function register() {
   response.then(function (result) {
     processRegister(result);
   });
+
+  localStorage.setItem(getRegisterUserData().nick+"-nr_games",0);
 }
 
 function processRegister(result) {
