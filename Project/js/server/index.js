@@ -1,4 +1,5 @@
 const http = require("http");
+const register = require("./handlers/register");
 const PORT = 9047;
 
 class Server {
@@ -15,7 +16,13 @@ class Server {
           this.handleGET(request, response);
           break;
         case "POST":
-          this.handlePOST(request, response);
+          let body = "";
+          request.on("data", (chunk) => {
+            body += chunk;
+          });
+          request.on("end", () => {
+            this.handlePOST(request, body);
+          });
           break;
         default:
           response.writeHead(404, "Unknown Request.");
@@ -43,7 +50,7 @@ class Server {
     }
   }
 
-  handlePOST(req, res) {
+  handlePOST(req, body) {
     const url = req.url.split("?")[0];
     switch (url) {
       case "/join":
@@ -59,7 +66,7 @@ class Server {
         handleRanking();
         break;
       case "/register":
-        handleRegister();
+        register.handleRegister(body);
         break;
       default:
         const error = {
