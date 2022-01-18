@@ -76,14 +76,13 @@ export function playGame(size, seeds) {
             row[pit].setAttribute("data-pit", pit);
             row[pit].onclick = notify;
         }
-      }
     };
 
-    for (let pit = 0; pit < row.length; pit++) {
+    /*for (let pit = 0; pit < row.length; pit++) {
       row[pit].setAttribute("data-pit", pit);
       row[pit].onclick = clickAction;
     }
-  };
+  };*/
 
   bindPitsAction(
     "one",
