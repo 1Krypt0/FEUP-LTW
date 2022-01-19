@@ -1,5 +1,6 @@
 const http = require("http");
 const register = require("./handlers/register");
+const join = require("./handlers/join");
 const PORT = 9047;
 
 class Server {
@@ -47,6 +48,7 @@ class Server {
           error: "Invalid GET Request",
         };
         res.write(JSON.stringify(error));
+        res.writeHead(404, "Unknown Request");
     }
   }
 
@@ -54,7 +56,8 @@ class Server {
     const url = req.url.split("?")[0];
     switch (url) {
       case "/join":
-        handleJoin();
+        let response = handleJoin(body);
+        res.write(JSON.stringify(response));
         break;
       case "/leave":
         handleLeave();
@@ -67,14 +70,15 @@ class Server {
         break;
       case "/register":
         let response = register.handleRegister(body);
-        res.write(JSON.stringify(response));
-        console.log(JSON.stringify(response));
+        res.write(JSON.stringify(response[0]));
+        res.writeHead(response[1]);
         break;
       default:
         const error = {
           error: "Invalid POST Request",
         };
         res.write(JSON.stringify(error));
+        res.writeHead(404, "Unknown Request");
     }
   }
 }

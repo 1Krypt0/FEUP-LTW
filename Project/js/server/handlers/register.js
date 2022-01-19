@@ -12,16 +12,16 @@ exports.handleRegister = function (body) {
     } else if (key === "pass") {
       pass = data[key];
     } else {
-      return { error: "Invalid parameter in request" };
+      return [{ error: "Invalid parameter in request" }, 400];
     }
   }
 
   if (nick === undefined) {
-    return { error: "Nick not specified" };
+    return [{ error: "Nick not specified" }, 400];
   }
 
   if (pass === undefined) {
-    return { error: "Password not specified" };
+    return [{ error: "Password not specified" }, 400];
   }
 
   try {
@@ -45,10 +45,13 @@ exports.handleRegister = function (body) {
           ) {
             console.log("User is authenticated");
             isFound = true;
-            return {};
+            return [{}, 200];
           } else {
             isFound = true;
-            return { error: "User registered with a different password" };
+            return [
+              { error: "User registered with a different password" },
+              401,
+            ];
           }
         }
       }
@@ -68,7 +71,7 @@ exports.handleRegister = function (body) {
         }
       });
 
-      return {};
+      return [{}, 200];
     }
   } catch (err) {
     console.error(err);
