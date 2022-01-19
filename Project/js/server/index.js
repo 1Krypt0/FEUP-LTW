@@ -54,9 +54,10 @@ class Server {
 
   handlePOST(req, res, body) {
     const url = req.url.split("?")[0];
+    let response;
     switch (url) {
       case "/join":
-        let response = handleJoin(body);
+        response = handleJoin(body);
         res.write(JSON.stringify(response));
         break;
       case "/leave":
@@ -69,7 +70,7 @@ class Server {
         handleRanking();
         break;
       case "/register":
-        let response = register.handleRegister(body);
+        response = register.handleRegister(body);
         res.write(JSON.stringify(response[0]));
         res.writeHead(response[1]);
         break;
