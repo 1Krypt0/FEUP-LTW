@@ -42,8 +42,8 @@ function getRegisterUserData() {
         password: password.value,
     };
 
-    nick = username.value;
-    pass = password.value;
+    let nick = username.value;
+    let pass = password.value;
 
     return data;
 }

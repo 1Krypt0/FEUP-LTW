@@ -10,9 +10,15 @@ class MyRequest {
     async sendRequest() {
         if (this.method_ === "GET") {
             try {
-                const response_1 = await fetch(URL + this.url_);
+                /*const response_1 = await fetch(URL + this.url_);
                 const data = await response_1.json();
-                return data;
+                return data;*/
+
+                const eventSource = new EventSource(url);
+                eventSource.onmessage = function(event) {
+                   const data = JSON.parse(event.data);
+                }
+                eventSource.close()
             } catch (error) {
                 console.log("Error:", error);
             }
