@@ -58,7 +58,8 @@ class Server {
     switch (url) {
       case "/join":
         response = handleJoin(body);
-        res.write(JSON.stringify(response));
+        res.write(JSON.stringify(response[0]));
+        res.writeHead(response[1]);
         break;
       case "/leave":
         handleLeave();
