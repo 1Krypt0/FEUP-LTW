@@ -14,11 +14,24 @@ class MyRequest {
                 const data = await response_1.json();
                 return data;*/
 
-                const eventSource = new EventSource(url);
+                let urlencoded=encodeURIComponent("?nick="+String(this.obj_.game)+"&game="+String(this.obj_.nick));
+                
+                const eventSource = new EventSource(URL+this.url_+urlencoded);//no inicio
+
+                eventSource.onstart = function() {
+                    console.log("Connection with server established");
+                }
+
                 eventSource.onmessage = function(event) {
                    const data = JSON.parse(event.data);
                 }
-                eventSource.close()
+
+                eventSource.onerror = function(event) {
+                    console.log("Error:",event);
+                }
+                //eventSource.close();//quando terminar jogo
+
+                return data;
             } catch (error) {
                 console.log("Error:", error);
             }
