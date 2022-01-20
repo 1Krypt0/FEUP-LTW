@@ -13,6 +13,8 @@ function login() {
     response.then(function (result) {
         processLogin(result);
     });
+
+    document.getElementById("username").innerHTML=getLoginUserData().nick;
 }
 
 function getLoginUserData() {
