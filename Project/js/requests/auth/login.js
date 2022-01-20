@@ -17,7 +17,7 @@ function login() {
   document.getElementById("username").innerHTML=getLoginUserData().nick;
   let scores = document.getElementById("scores");
   for(let i=1; i <= parseInt(localStorage.getItem(getLoginUserData().nick+"-nr_games")) ; i++){
-    let newscore=document.createElement('li');
+    let newscore=document.createElement('div');
     newscore.innerHTML= localStorage.getItem(username+"-g-"+i);
     scores.appendChild(newscore);
   }
