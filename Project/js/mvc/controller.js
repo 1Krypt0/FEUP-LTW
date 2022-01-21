@@ -263,6 +263,31 @@ export class MancalaController {
         }
     }
 
+    
+    getTotalScore(player){
+        let stones=0;
+        if(player==1){
+            for(let i=0; i < this.getModel().getSize(); i++){
+                stones+=this.getModel().getStones(i);
+            }
+        }
+        else{
+            for(let i=0; i < this.getModel().getSize(); i++){
+                stones+=this.getModel().getStones(i+this.getModel().getSize());
+            }
+        }
+        return stones;
+    }
+    
+    getScore(player){
+        if (player==1){
+            return this.getModel().getPlayer1Store();
+        }
+        else{
+            return this.getModel().getPlayer2Store();
+        }
+    }
+
     addScore() {
         let scores = document.getElementById("scores");
         let newscore=document.createElement('div');
@@ -273,10 +298,23 @@ export class MancalaController {
     addScoreStorage() {
         //relative to user, when user registers, nr_games is put to 0
         this.addScore();
+        
         let username=document.getElementById("username").innerHTML;
-        let ngame = localStorage.getItem(username+"nr_games")+1;
-        localStorage.setItem(username+"-nr_games", ngame);
-        localStorage.setItem(username+"-g-"+ngame,localStorage.getItem,this.getScore(1)+"-"+this.getScore(2));
+
+        if ((localStorage.getItem(username+"-nr_games")===null) || (isNaN(localStorage.getItem(username+"-nr_games")))) {
+            localStorage.setItem(username+"-nr_games", JSON.stringify(0));
+        }
+
+        let ngame = parseInt(localStorage.getItem(username+"-nr_games"))+1;
+        localStorage.setItem(username+"-nr_games",JSON.stringify(ngame));
+        localStorage.setItem(username+"-g-"+String(ngame),JSON.stringify(this.getScore(1)+"-"+this.getScore(2)));
+
+    }
+
+    ai_play() {
+        let pits=this.getModel().getCurrentPits();
+        this.doPlayerTurn(pits[0]);
+        return false;
     }
 
 

@@ -26,8 +26,10 @@ export class Game {
     }
 }
 
+var game;
+
 export function playGame(size, seeds) {
-    let game = new Game(size, seeds);
+    game = new Game(size, seeds);
     let waitingForMove = true;
 
     game.init();
@@ -43,6 +45,18 @@ export function playGame(size, seeds) {
                 if (!game.getController().doPlayerTurn(pit)) {
                     waitingForMove = true;
                 }
+                /*const myTimeout = setTimeout(function () {
+                  leaveGame(game, nick, password)
+                }, 5000);*/
+
+            }
+
+            document.getElementById("score1").innerHTML=game.getController().getScore(1);
+            document.getElementById("score2").innerHTML=game.getController().getScore(2);
+
+            if(document.getElementById("ai").checked){
+              game.getController().ai_play();
+              console.log(game.getModel().getCurrentPlayer());
             }
         };
 
@@ -60,4 +74,25 @@ export function playGame(size, seeds) {
         "two",
         document.querySelectorAll(".row.player-two .pitAndTracker")
     );
+
+    document.getElementById("reset").addEventListener('click', reset);
+}
+
+function reset() {
+  //player wins
+  /*if(game.getModel().getCurrentPlayer()=="two"){
+    game.getController().switchTurn()
+  }*/
+
+  let status = document.querySelector(".status");
+
+  if (game.getController().getScore(1) > game.getController().getScore(2)) {
+    status.innerHTML = "Player one wins!";
+  } else if (game.getController().getScore(2) > game.getController().getScore(1)) {
+    status.innerHTML = "Player two wins!";
+  } else {
+    status.innerHTML = "Draw!";
+  }
+  game.getController().addScoreStorage();
+  playGame();
 }

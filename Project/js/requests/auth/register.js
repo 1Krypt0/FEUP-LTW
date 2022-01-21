@@ -11,8 +11,7 @@ function register() {
     response.then(function (result) {
         processRegister(result);
     });
-
-    localStorage.setItem(getRegisterUserData().nick+"-nr_games",0);
+    localStorage.setItem(getRegisterUserData().nick+"-nr_games",JSON.stringify(0));
 }
 
 function processRegister(result) {
