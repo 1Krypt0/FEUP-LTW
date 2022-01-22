@@ -7,6 +7,7 @@
     <link rel="stylesheet" href="style.css" />
     <script src="js/modal/instructions-modal.js" defer></script>
     <script src="./js/modal/auth-modal.js" defer></script>
+    <script src="./js/modal/scores-modal.js" defer></script>
     <script type="module" src="./js/requests/auth/login.js" defer></script>
     <script type="module" src="./js/requests/auth/register.js" defer></script>
     <script type="module" src="./js/requests/join.js"></script>
@@ -77,9 +78,29 @@
               <label for="pitNo">Pits for each player</label>
             </div>
             <br />
+            <script>    
+              function onlyOne(cb){
+                let cbs = document.getElementsByName("check");
+                cbs.forEach((item) => {
+                  if (item !== cb){item.checked=false;}
+                });
+              }
+            </script>
             <div class="input-container">
-              <input type="number" name="seedNo" id="seedNo" placeholder="4" />
+              <input type="number" name="check" id="seedNo" placeholder="4" onclick=(function(){onlyOne(this);})/>
               <label for="seedNo">Seeds on each pit</label>
+            </div>
+            <div class="input-container">
+              <input type="checkbox" name="check" id="ai_mode" onclick="onlyOne(this)"/>
+              <label for="ai_mode">AI mode</label>
+            </div>
+            <div class="input-container">
+              <input type="checkbox" name="check" id="pvp_mode" onclick="onlyOne(this)" checked/>
+              <label for="seedNo">PVP mode</label>
+            </div>
+            <div class="input-container">
+              <input type="checkbox" name="check" id="local_mode" onclick="onlyOne(this)"/>
+              <label for="local_mode">Local mode</label>
             </div>
             <br />
             <br />
@@ -87,6 +108,17 @@
           </form>
         </article>
       </section>
+
+      <section id="scores-modal" class="modal">
+        <article class="modal-content">
+          <span class="modal-close" id="scores-modal-close">×</span>
+          <div class="scores-content">
+            <h2 id="scores-header">Scores</h2>
+            <div id = scores_d></div>
+          </div>
+        </article>
+      </section> 
+
       <section id="instructions-modal" class="modal">
         <article class="modal-content">
           <span class="modal-close" id="instructions-modal-close">×</span>
@@ -193,6 +225,7 @@
           </div>
         </article>
       </section>
+
       <header>
         <h1>Mancala: The best game you never heard of</h1>
         <nav>
@@ -204,7 +237,12 @@
               <a id="scoreboard" href="#">Scoreboard</a>
             </li>
             <li>
+              <a id="scores" href="#">Scores</a>
+            </li>
+            <li>
               <a href="#">Logout</a>
+            </li>
+            <li id="username">
             </li>
           </ul>
         </nav>
@@ -228,32 +266,7 @@
           It is player <span class="current-player">one</span>'s turn
         </h2>
       </section>
-      <div id = username></div>
-        <div id = "scores">
-            Scores
-        </div>
-        <table class=scoreboard>
-            <caption>
-            Scoreboard
-            </caption>
-            <tr>
-            <td>Player one</td>
-            <td> <span id="score1">0</span></td>
-            </tr>
-            <tr>
-            <td>Player two</td>
-            <td> <span id="score2">0</span></td>
-            </tr>
-        </table>
-        <div class="dropdown">
-            <p>Game Mode:</p>
-
-            <div>
-            <input type="checkbox" id="ai" name="ai">
-            <label for="ai">AI</label>
-            </div>
-        </div>
-        <button class="button button1" id="reset">End Game</button>
+      <button class="footerbutton" id="reset">End Game</button>
     </main>
   </body>
 </html>

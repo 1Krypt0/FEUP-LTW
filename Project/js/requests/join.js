@@ -51,6 +51,14 @@ function setGame(seedAmount, pitAmount) {
   playGame(pitAmount, seedAmount);
 }
 
-paramsButton.onclick = join;
+paramsButton.addEventListener("click",function() {
+  if(document.getElementById("pvp_mode").checked){
+    paramsButton.onclick = join;
+  }
+  else {
+    setGame(getParams().initial, getParams().size);
+    paramsModal.style.display = "none";
+  }
+});
 
 export { GAME_ID };

@@ -24,4 +24,5 @@ function getParams() {
 
 function processLeave(result) {
     console.log(result);
+    //end game eventsource
 }

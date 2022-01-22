@@ -4,6 +4,7 @@ import { Mancala } from "./model.js";
 import { nick, pass, isEmpty } from "../requests/auth/login.js";
 import { GAME_ID } from "../requests/join.js";
 import { MyRequest } from "../requests/requests.js";
+import { Board } from "../board.js";
 
 export class Game {
   constructor(size, seeds) {
@@ -29,10 +30,8 @@ export class Game {
   }
 }
 
-var game;
-
 export function playGame(size, seeds) {
-    game = new Game(size, seeds);
+    let game = new Game(size, seeds);
     let waitingForMove = true;
 
     game.init();
@@ -49,22 +48,41 @@ export function playGame(size, seeds) {
                         waitingForMove = true;
                     }
                 }
-                /*const myTimeout = setTimeout(function () {
-                  leaveGame(game, nick, password
-                }, 5000);*/
+
+                //leave
+                const myTimeout = setTimeout(function () {
+                  leaveGame(game, nick, pass)
+                }, 5000);
 
             } else {
               console.log(game);
               console.log("Error: " + result.error);
             }
+        };
 
-            document.getElementById("score1").innerHTML=game.getController().getScore(1);
-            document.getElementById("score2").innerHTML=game.getController().getScore(2);
+        let clickAction = function () {
+          if (
+              game.getModel().getCurrentPlayer() === player &&
+              waitingForMove
+          ) {
+              waitingForMove = false;
+              let pit = this;
 
-            if(document.getElementById("ai").checked){
-              game.getController().ai_play();
+              if (!game.getController().doPlayerTurn(pit)) {
+                  waitingForMove = true;
+              }
+              
+              console.log("curr player");
               console.log(game.getModel().getCurrentPlayer());
-            } 
+              if(document.getElementById("ai_mode").checked && game.getModel().getCurrentPlayer()=="two" && waitingForMove){
+                console.log("entered");
+                game.getController().ai_play(0);
+              }
+          }
+          
+          /*const myTimeout = setTimeout(function () {
+            leaveGame(game, nick, password)
+          }, 5000);*/
         };
         
 
@@ -89,7 +107,12 @@ export function playGame(size, seeds) {
 
         for (let pit = 0; pit < row.length; pit++) {
             row[pit].setAttribute("data-pit", pit);
-            row[pit].onclick = notify;
+            if(document.getElementById("pvp_mode").checked){
+              row[pit].onclick = notify;
+            }
+            else{
+              row[pit].onclick = clickAction;
+            }
         }
     };
 
@@ -97,15 +120,20 @@ export function playGame(size, seeds) {
         "one",
         document.querySelectorAll(".row.player-one .pitAndTracker")
     );
-    bindPitsAction(
-        "two",
-        document.querySelectorAll(".row.player-two .pitAndTracker")
-    );
 
-    document.getElementById("reset").addEventListener('click', reset);
+    if(!document.getElementById("ai_mode").checked){
+      bindPitsAction(
+          "two",
+          document.querySelectorAll(".row.player-two .pitAndTracker")
+      );
+    };
+
+    document.getElementById("reset").addEventListener('click', function() { 
+      leaveGame(nick, pass, game);
+    });
 }
 
-function reset() {
+function leaveGame(nickname, password, game) {
   //player wins
   /*if(game.getModel().getCurrentPlayer()=="two"){
     game.getController().switchTurn()
@@ -121,5 +149,15 @@ function reset() {
     status.innerHTML = "Draw!";
   }
   game.getController().addScoreStorage();
-  playGame();
+
+  //send leave request
+
+  //initiate new game
+  //get 6 and 4 from  config
+  //create new board
+  //let board = new Board(6, 4);
+  //board.render();
+
+  //ver configs e correr novo jogo
+  playGame(6, 4);
 }

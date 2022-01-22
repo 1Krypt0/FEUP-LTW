@@ -14,9 +14,8 @@ function login() {
         processLogin(result);
     });
 
-    document.getElementById("username").innerHTML=nick;
-
-    let scores = document.getElementById("scores");
+    document.getElementById("username").innerHTML="<h2>" + nick + "</h2>";;
+    let scores = document.getElementById("scores_d");
     let ngames = parseInt(localStorage.getItem(nick+"-nr_games"));
 
     for(let i=1;i<=ngames;i++){
@@ -45,11 +44,6 @@ function processLogin(result) {
   const authModal = document.getElementById("auth-modal");
   const paramsModal = document.getElementById("myModal");
   if (isEmpty(result)) {
-    const navbar = document.getElementById("navbar");
-    let name = document.createElement("li");
-    name.innerHTML = "<h2>" + getLoginUserData().nick + "</h2>";
-    navbar.appendChild(name);
-
     authModal.style.display = "none";
     paramsModal.style.display = "block";
   } else {

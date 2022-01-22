@@ -18,6 +18,58 @@ export class MancalaController {
     });
   }
 
+  ai_play(level) {
+    let pitToPlay = 0;
+    let pitSet=false;
+    let avlblpits = [];
+    if(level==0){
+        for(let i = this.getModel().getSize(); i<=2*this.getModel().getSize();i++){
+          if(this.getModel().getStones(i) > 0){
+            avlblpits.push(i);
+          }
+        }
+        pitToPlay=avlblpits[Math.floor(Math.random() * avlblpits.length)];
+        /*if(this.getModel().getStones(pitToPlay) > 0){
+          pitSet=true;
+        }*/
+    }
+    else{
+      while(!pitSet){
+        for(let i; i < this.getModel().getSize();i++){
+          //first goal-> last seed on empty space and seeds on front
+          //second goal-> last seed on empty space
+          //third goal -> last seed on store
+          //fourth goal-> 
+
+        }
+      }
+    }
+
+    let row = this.getModel().getPlayer2Pits();
+
+    let turnOver = this.moveStones(pitToPlay);
+    console.log("turnover");
+    console.log(turnOver);
+
+    if (turnOver || this.isRowEmpty(row)) {
+      this.switchTurn();
+      console.log("switch");
+    }
+    else{
+      console.log("keep");
+      this.ai_play(0);
+    }
+
+    // make sure that a player hasn't run out of stones
+    if (this.checkGameOver()) {
+      return true;
+    }
+
+    // change the player if the current turn is ended
+
+    return false;
+  }
+
   doPlayerTurn(pit) {
     let pitNo = parseInt(pit.getAttribute("data-pit"));
     if (this.getModel().getCurrentPlayer() === "two") {
@@ -83,6 +135,8 @@ export class MancalaController {
     } else {
       status.innerHTML = "Draw!";
     }
+
+    this.addScoreStorage();
 
     return true;
   }
@@ -210,7 +264,7 @@ export class MancalaController {
     }
 
     addScore() {
-        let scores = document.getElementById("scores");
+        let scores = document.getElementById("scores_d");
         let newscore=document.createElement('div');
         newscore.innerHTML= this.getScore(1)+"-"+this.getScore(2);
         scores.appendChild(newscore);
@@ -230,12 +284,6 @@ export class MancalaController {
         localStorage.setItem(username+"-nr_games",JSON.stringify(ngame));
         localStorage.setItem(username+"-g-"+String(ngame),JSON.stringify(this.getScore(1)+"-"+this.getScore(2)));
 
-    }
-
-    ai_play() {
-        let pits=this.getModel().getCurrentPits();
-        this.doPlayerTurn(pits[0]);
-        return false;
     }
 
   checkWinner() {
