@@ -1,11 +1,11 @@
 const URL = "http://twserver.alunos.dcc.fc.up.pt:8008/";
 
 class MyRequest {
-    constructor(method, url, obj) {
-        this.method_ = method;
-        this.url_ = url;
-        this.obj_ = obj;
-    }
+  constructor(method, url, obj) {
+    this.method_ = method;
+    this.url_ = url;
+    this.obj_ = obj;
+  }
 
     async sendRequest() {
         if (this.method_ === "GET") {
@@ -52,5 +52,6 @@ class MyRequest {
         }
     }
 }
+
 
 export { MyRequest };
