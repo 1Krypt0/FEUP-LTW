@@ -36,7 +36,6 @@ export class MancalaController {
         }
       }
 
-      console.log("The available pits ARE: " + avlblpits);
       pitToPlay = avlblpits[Math.floor(Math.random() * avlblpits.length)];
       /*if(this.getModel().getStones(pitToPlay) > 0){
         pitSet=true;
