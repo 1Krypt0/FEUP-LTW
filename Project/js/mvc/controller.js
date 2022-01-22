@@ -20,27 +20,34 @@ export class MancalaController {
 
   ai_play(level) {
     let pitToPlay = 0;
-    let pitSet=false;
+    let pitSet = false;
     let avlblpits = [];
-    if(level==0){
-        for(let i = this.getModel().getSize(); i<=2*this.getModel().getSize();i++){
-          if(this.getModel().getStones(i) > 0){
-            avlblpits.push(i);
-          }
+    if (level == 0) {
+      for (
+        let i = this.getModel().getSize();
+        i <= 2 * this.getModel().getSize();
+        i++
+      ) {
+        if (i === this.getModel().getSize()) {
+          continue;
         }
-        pitToPlay=avlblpits[Math.floor(Math.random() * avlblpits.length)];
-        /*if(this.getModel().getStones(pitToPlay) > 0){
-          pitSet=true;
-        }*/
-    }
-    else{
-      while(!pitSet){
-        for(let i; i < this.getModel().getSize();i++){
+        if (this.getModel().getStones(i) > 0) {
+          avlblpits.push(i);
+        }
+      }
+
+      console.log("The available pits ARE: " + avlblpits);
+      pitToPlay = avlblpits[Math.floor(Math.random() * avlblpits.length)];
+      /*if(this.getModel().getStones(pitToPlay) > 0){
+        pitSet=true;
+      }*/
+    } else {
+      while (!pitSet) {
+        for (let i; i < this.getModel().getSize(); i++) {
           //first goal-> last seed on empty space and seeds on front
           //second goal-> last seed on empty space
           //third goal -> last seed on store
-          //fourth goal-> 
-
+          //fourth goal->
         }
       }
     }
@@ -54,8 +61,7 @@ export class MancalaController {
     if (turnOver || this.isRowEmpty(row)) {
       this.switchTurn();
       console.log("switch");
-    }
-    else{
+    } else {
       console.log("keep");
       this.ai_play(0);
     }
@@ -209,82 +215,85 @@ export class MancalaController {
     }
 
     if (
-        this.getModel().getCurrentPlayer() === "two" &&
-        pit > this.getModel().getSize() &&
-        pit != this.getModel().getPlayer2StoreIdx() &&
-        this.getModel().getStones(pit) === 1
-      ) {
-        let inverse = 2 * this.getModel().getSize() - pit;
-        let seeds = this.getModel().getPlayer1Pits()[inverse];
-        if (seeds === 0) {
-          return true;
-        }
-        this.getModel().setPlayer2Store(
-          this.getModel().getPlayer2Store() + seeds + 1
-        );
-  
-        this.getModel().setStones(pit, 0);
-        this.getModel().setStones(inverse, 0);
-        this.getView().renderStoreNo(this.getModel().getSize() * 2 + 1);
-        this.getView().renderPitNo(pit);
-        this.getView().renderPitNo(inverse);
-  
+      this.getModel().getCurrentPlayer() === "two" &&
+      pit > this.getModel().getSize() &&
+      pit != this.getModel().getPlayer2StoreIdx() &&
+      this.getModel().getStones(pit) === 1
+    ) {
+      let inverse = 2 * this.getModel().getSize() - pit;
+      let seeds = this.getModel().getPlayer1Pits()[inverse];
+      if (seeds === 0) {
         return true;
       }
-  
-      // the user's turn ended if the stones did not end in the storage pit
-      return (
-        pit !== this.getModel().getPlayer1StoreIdx() &&
-        pit !== this.getModel().getPlayer2StoreIdx()
+      this.getModel().setPlayer2Store(
+        this.getModel().getPlayer2Store() + seeds + 1
       );
-    }
-    
-    getTotalScore(player){
-        let stones=0;
-        if(player==1){
-            for(let i=0; i < this.getModel().getSize(); i++){
-                stones+=this.getModel().getStones(i);
-            }
-        }
-        else{
-            for(let i=0; i < this.getModel().getSize(); i++){
-                stones+=this.getModel().getStones(i+this.getModel().getSize());
-            }
-        }
-        return stones;
-    }
-    
-    getScore(player){
-        if (player==1){
-            return this.getModel().getPlayer1Store();
-        }
-        else{
-            return this.getModel().getPlayer2Store();
-        }
+
+      this.getModel().setStones(pit, 0);
+      this.getModel().setStones(inverse, 0);
+      this.getView().renderStoreNo(this.getModel().getSize() * 2 + 1);
+      this.getView().renderPitNo(pit);
+      this.getView().renderPitNo(inverse);
+
+      return true;
     }
 
-    addScore() {
-        let scores = document.getElementById("scores_d");
-        let newscore=document.createElement('div');
-        newscore.innerHTML= this.getScore(1)+"-"+this.getScore(2);
-        scores.appendChild(newscore);
+    // the user's turn ended if the stones did not end in the storage pit
+    return (
+      pit !== this.getModel().getPlayer1StoreIdx() &&
+      pit !== this.getModel().getPlayer2StoreIdx()
+    );
+  }
+
+  getTotalScore(player) {
+    let stones = 0;
+    if (player == 1) {
+      for (let i = 0; i < this.getModel().getSize(); i++) {
+        stones += this.getModel().getStones(i);
+      }
+    } else {
+      for (let i = 0; i < this.getModel().getSize(); i++) {
+        stones += this.getModel().getStones(i + this.getModel().getSize());
+      }
+    }
+    return stones;
+  }
+
+  getScore(player) {
+    if (player == 1) {
+      return this.getModel().getPlayer1Store();
+    } else {
+      return this.getModel().getPlayer2Store();
+    }
+  }
+
+  addScore() {
+    let scores = document.getElementById("scores_d");
+    let newscore = document.createElement("div");
+    newscore.innerHTML = this.getScore(1) + "-" + this.getScore(2);
+    scores.appendChild(newscore);
+  }
+
+  addScoreStorage() {
+    //relative to user, when user registers, nr_games is put to 0
+    this.addScore();
+
+    let username = document.getElementById("username").innerHTML;
+
+    if (
+      localStorage.getItem(username + "-nr_games") === null ||
+      isNaN(localStorage.getItem(username + "-nr_games"))
+    ) {
+      localStorage.setItem(username + "-nr_games", JSON.stringify(0));
     }
 
-    addScoreStorage() {
-        //relative to user, when user registers, nr_games is put to 0
-        this.addScore();
-        
-        let username=document.getElementById("username").innerHTML;
-
-        if ((localStorage.getItem(username+"-nr_games")===null) || (isNaN(localStorage.getItem(username+"-nr_games")))) {
-            localStorage.setItem(username+"-nr_games", JSON.stringify(0));
-        }
-
-        let ngame = parseInt(localStorage.getItem(username+"-nr_games"))+1;
-        localStorage.setItem(username+"-nr_games",JSON.stringify(ngame));
-        localStorage.setItem(username+"-g-"+String(ngame),JSON.stringify(this.getScore(1)+"-"+this.getScore(2)));
-
-    }
+    let ngame = parseInt(localStorage.getItem(username + "-nr_games")) + 1;
+    localStorage.setItem(username + "-nr_games", JSON.stringify(ngame));
+    localStorage.setItem(
+      username + "-g-" + String(ngame),
+      JSON.stringify(this.getScore(1) + "-" + this.getScore(2))
+    );
+  }
 
   checkWinner() {
     if (this.getModel().getCurrentPlayer() === "one") {
