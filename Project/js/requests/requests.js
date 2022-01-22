@@ -51,7 +51,6 @@ class MyRequest {
             }
         }
     }
-  }
 }
 
 export { MyRequest };
