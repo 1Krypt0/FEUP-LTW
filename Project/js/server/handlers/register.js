@@ -43,7 +43,6 @@ exports.handleRegister = function (body) {
             lineData.pass ===
             crypto.createHash("md5").update(pass).digest("hex")
           ) {
-            console.log("User is authenticated");
             isFound = true;
             return [{}, 200];
           } else {
