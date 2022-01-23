@@ -1,5 +1,6 @@
 const http = require("http");
 const register = require("./handlers/register");
+const ranking = require("./handlers/ranking");
 const join = require("./handlers/join");
 const PORT = 9047;
 
@@ -68,7 +69,9 @@ class Server {
         handleNotify();
         break;
       case "/ranking":
-        handleRanking();
+        response = ranking.handleRanking();
+        res.write(JSON.stringify(response[0]));
+        res.writeHead(response[1]);
         break;
       case "/register":
         response = register.handleRegister(body);
