@@ -1,6 +1,9 @@
 import { MancalaController } from "./controller.js";
 import { MancalaView } from "./view.js";
 import { Mancala } from "./model.js";
+import { nick, pass, isEmpty } from "../requests/auth/login.js";
+import { GAME_ID } from "../requests/join.js";
+import { MyRequest } from "../requests/requests.js";
 
 export class Game {
   constructor(size, seeds) {
@@ -27,27 +30,59 @@ export class Game {
 }
 
 export function playGame(size, seeds) {
-  let game = new Game(size, seeds);
-  let waitingForMove = true;
+    let game = new Game(size, seeds);
+    let waitingForMove = true;
 
-  game.init();
+    game.init();
 
-  let bindPitsAction = function (player, row) {
-    let clickAction = function () {
-      if (game.getModel().getCurrentPlayer() === player && waitingForMove) {
-        waitingForMove = false;
-        let pit = this;
-        if (!game.getController().doPlayerTurn(pit)) {
-          waitingForMove = true;
+    let bindPitsAction = function (player, row) {
+        let processNotify = function (result, pit) {
+            if (isEmpty(result)) {
+                if (
+                    game.getModel().getCurrentPlayer() === player &&
+                    waitingForMove
+                ) {
+                    waitingForMove = false;
+                    if (!game.getController().doPlayerTurn(pit)) {
+                        waitingForMove = true;
+                    }
+                }
+            } else {
+                console.log(game);
+                console.log("Error: " + result.error);
+            }
+        };
+
+        let notify = function () {
+            const move = Number(this.getAttribute("data-pit"));
+            const data = {
+                nick: nick,
+                password: pass,
+                game: GAME_ID,
+                move: move,
+            };
+
+            const request = new MyRequest("POST", "notify", data);
+
+            let response = request.sendRequest();
+
+            let pit = this;
+            response.then((result) => {
+                processNotify(result, pit);
+            });
+        };
+
+        for (let pit = 0; pit < row.length; pit++) {
+            row[pit].setAttribute("data-pit", pit);
+            row[pit].onclick = notify;
         }
-      }
     };
 
-    for (let pit = 0; pit < row.length; pit++) {
+    /*for (let pit = 0; pit < row.length; pit++) {
       row[pit].setAttribute("data-pit", pit);
       row[pit].onclick = clickAction;
     }
-  };
+  };*/
 
   bindPitsAction(
     "one",

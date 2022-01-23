@@ -13,6 +13,14 @@ function login() {
   response.then(function (result) {
     processLogin(result);
   });
+
+  document.getElementById("username").innerHTML=getLoginUserData().nick;
+  let scores = document.getElementById("scores");
+  for(let i=1; i <= parseInt(localStorage.getItem(getLoginUserData().nick+"-nr_games")) ; i++){
+    let newscore=document.createElement('div');
+    newscore.innerHTML= localStorage.getItem(username+"-g-"+i);
+    scores.appendChild(newscore);
+  }
 }
 
 function getLoginUserData() {
@@ -56,4 +64,4 @@ function isEmpty(obj) {
 
 loginButton.onclick = login;
 
-export { nick, pass };
+export { nick, pass, isEmpty };
