@@ -90,7 +90,15 @@ class Server {
         handleLeave();
         break;
       case "/notify":
-        handleNotify();
+        response = handleNotify(body);
+        res.writeHead(response[1], {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(response[0]), () => {
+          res.end();
+        });
         break;
       case "/ranking":
         response = ranking.handleRanking();

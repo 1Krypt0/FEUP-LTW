@@ -2,8 +2,8 @@ const fs = require("fs");
 const crypto = require("crypto");
 
 exports.CAN_GAME_START = false;
-let PLAYER_1 = null;
-let PLAYER_2 = null;
+exports.PLAYER_1 = null;
+exports.PLAYER_2 = null;
 
 exports.handleJoin = function (body) {
   const data = JSON.parse(body);
