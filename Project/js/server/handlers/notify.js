@@ -1,5 +1,7 @@
 const game = require("./join");
 
+exports.GAME_OVER = false;
+
 exports.handleNotify = function (body) {
   const data = JSON.parse(body);
   console.log(data);
@@ -30,9 +32,28 @@ exports.handleNotify = function (body) {
 
   const move = parseInt(data.move);
 
-  if (move < 0 || move >= game.GAME.getModel().getPlayer2StoreIdx()) {
+  if (move < 0 || move >= game.GAME.getModel().getPlayer1StoreIdx()) {
     return [{ error: "Invalid move" }, 400];
   }
+
+  if (data.nick === game.PLAYER_2) {
+    move += game.GAME.getModel().getSize() + 1;
+  }
+
+  makeMove(game.GAME, move);
+  return [{}, 200];
 };
 
-function makeMove(game, move) {}
+function makeMove(game, move) {
+  console.log(game.GAME);
+
+  let gameOver = game.GAME.getController().doPlayerTurn(move);
+
+  console.log(game.GAME);
+
+  if (!gameOver) {
+    game.GAME.getController().switchTurn();
+  } else {
+    exports.GAME_OVER = true;
+  }
+}
