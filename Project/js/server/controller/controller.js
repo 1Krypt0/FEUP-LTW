@@ -13,13 +13,9 @@ export class MancalaController {
     });
   }
 
-  doPlayerTurn(pit) {
-    let pitNo = parseInt(pit.getAttribute("data-pit"));
-    if (this.getModel().getCurrentPlayer() === "two") {
-      pitNo += this.getModel().getSize() + 1;
-    }
+  doPlayerTurn(pitNo) {
     let row = undefined;
-    if (pit.parentNode.classList.contains("player-one")) {
+    if (pitNo < this.getModel().getPlayer1StoreIdx()) {
       row = this.getModel().getPlayer1Pits();
     } else {
       row = this.getModel().getPlayer2Pits();
@@ -37,7 +33,6 @@ export class MancalaController {
     }
 
     // change the player if the current turn is ended
-
     return false;
   }
 
@@ -52,10 +47,12 @@ export class MancalaController {
       return false;
     }
     // Determine which player holds the most stones
-    // TODO: change to winner variable in model
     if (winner === 1) {
+      this.getModel().setWinner(this.getModel().player1_);
     } else if (winner === 2) {
+      this.getModel().setWinner(this.getModel().player2_);
     } else {
+      this.getModel().setWinner(null);
     }
 
     return true;
