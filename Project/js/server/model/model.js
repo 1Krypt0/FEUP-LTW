@@ -5,6 +5,7 @@ export class Mancala {
     this.currentPlayer_ = player1;
     this.player1_ = player1;
     this.player2_ = player2;
+    this.winner_ = undefined;
 
     this.player1Pits_ = Array(size).fill(Number(seeds));
     this.player2Pits_ = Array(size).fill(Number(seeds));
@@ -14,6 +15,14 @@ export class Mancala {
 
   getCurrentPlayer() {
     return this.currentPlayer_;
+  }
+
+  getWinner() {
+    return this.winner_;
+  }
+
+  setWinner(winner) {
+    this.winner_ = winner;
   }
 
   getOtherPlayer() {
