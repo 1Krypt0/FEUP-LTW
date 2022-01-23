@@ -1,7 +1,7 @@
 const fs = require("fs");
 const crypto = require("crypto");
 
-let CAN_GAME_START = false;
+exports.CAN_GAME_START = false;
 let PLAYER_1 = null;
 let PLAYER_2 = null;
 
@@ -35,7 +35,7 @@ exports.handleJoin = function (body) {
   if (PLAYER_1 !== null && PLAYER_2 === null) {
     if (PLAYER_1 !== data.nick) {
       PLAYER_2 = data.nick;
-      CAN_GAME_START = true;
+      exports.CAN_GAME_START = true;
       return [{ game: GAME_HASH }, 200];
     } else {
       return [{ error: "User already playing" }, 400];
