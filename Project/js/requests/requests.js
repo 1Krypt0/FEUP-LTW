@@ -1,4 +1,4 @@
-const URL = "http://twserver.alunos.dcc.fc.up.pt:8008/";
+const URL = "http://twserver.alunos.dcc.fc.up.pt:9047/";
 
 class MyRequest {
   constructor(method, url, obj) {
@@ -22,6 +22,8 @@ class MyRequest {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "Access-Control-Allow-Origin",
+            "Access-Control-Allow-Origin": "*",
           },
           body: JSON.stringify(this.obj_),
         });

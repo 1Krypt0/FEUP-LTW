@@ -26,15 +26,27 @@ class Server {
             this.handlePOST(request, response, body);
           });
           break;
+        case "OPTIONS":
+          response.writeHead(200, {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+          });
+          response.end();
+          break;
         default:
-          response.writeHead(404, "Unknown Request.");
+          response.writeHead(404, {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+          });
+          response.end();
           break;
       }
-      response.end();
     });
   }
 
-  listen() {
+  listen(PORT) {
     this.server.listen(PORT);
   }
 
@@ -48,8 +60,14 @@ class Server {
         const error = {
           error: "Invalid GET Request",
         };
-        res.write(JSON.stringify(error));
-        res.writeHead(404, "Unknown Request");
+        res.writeHead(404, {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(error), () => {
+          res.end();
+        });
     }
   }
 
@@ -59,8 +77,14 @@ class Server {
     switch (url) {
       case "/join":
         response = join.handleJoin(body);
-        res.write(JSON.stringify(response[0]));
-        res.writeHead(response[1]);
+        res.writeHead(response[1], {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(response[0]), () => {
+          res.end();
+        });
         break;
       case "/leave":
         handleLeave();
@@ -70,20 +94,40 @@ class Server {
         break;
       case "/ranking":
         response = ranking.handleRanking();
-        res.write(JSON.stringify(response[0]));
-        res.writeHead(response[1]);
+        res.writeHead(response[1], {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(response[0]), () => {
+          res.end();
+        });
         break;
       case "/register":
+        console.log(body);
         response = register.handleRegister(body);
-        res.write(JSON.stringify(response[0]));
-        res.writeHead(response[1]);
+        res.writeHead(response[1], {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+
+        res.write(JSON.stringify(response[0]), () => {
+          res.end();
+        });
         break;
       default:
         const error = {
           error: "Invalid POST Request",
         };
-        res.write(JSON.stringify(error));
-        res.writeHead(404, "Unknown Request");
+        res.writeHead(404, {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(error), () => {
+          res.end();
+        });
     }
   }
 }
