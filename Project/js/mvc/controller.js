@@ -18,6 +18,21 @@ export class MancalaController {
     });
   }
 
+  end_stones_idx(idx, stones){
+    let mod = (idx+stones) % (2*this.getModel().getSize()+2);
+    let res;
+    if(mod==0 && idx+stones>0){
+      res= mod+2*this.getModel().getSize();
+    }
+    else{
+      res= mod;
+    }
+    if(idx+stones > 3*this.getModel().getSize()+2){
+      res++
+    }
+    return res;
+  }
+
   ai_play(level) {
     let pitToPlay = 0;
     let pitSet = false;
@@ -40,28 +55,65 @@ export class MancalaController {
       /*if(this.getModel().getStones(pitToPlay) > 0){
         pitSet=true;
       }*/
-    } else {
-      while (!pitSet) {
-        for (let i; i < this.getModel().getSize(); i++) {
-          //first goal-> last seed on empty space and seeds on front
-          //second goal-> last seed on empty space
-          //third goal -> last seed on store
-          //fourth goal->
+    } else if (level==1){
+        //first goal-> last seed on empty space and seeds on front
+        //second goal -> last seed on store
+        //third goal-> last seed on empty space
+        //fourth goal->
+        for (
+          let i = this.getModel().getSize();
+          i <= 2 * this.getModel().getSize();
+          i++
+        ) {
+          if (i === this.getModel().getSize()) {
+            continue;
+          }
+          if (this.getModel().getStones(i) > 0) {
+            avlblpits.push(i);
+          }
         }
-      }
+
+        pitSet=false;
+        let loops=0;
+        while (!pitSet) {
+          for(let i=0;i<avlblpits.length;i++){
+            let idx_stop= this.end_stones_idx(avlblpits[i],this.getModel().getStones(i));
+            if(loops==0 && idx_stop!=this.getModel().getPlayer2StoreIdx()){
+              if(this.getModel().getStones(idx_stop)==0){
+                let inverse = 2 * this.getModel().getSize() - idx_stop;
+                if (this.getModel().getStones(inverse) > 0 && (inverse<this.getModel().getSize())){
+                  pitToPlay=avlblpits[i];
+                  pitSet=true;
+                  break;
+                }
+              }
+            }
+            else if (loops==1){
+              if(idx_stop!=this.getModel().getPlayer2StoreIdx()){
+                pitToPlay=avlblpits[i];
+                pitSet=true;
+                break;
+              }
+            }
+            else{
+              pitToPlay=avlblpits[avlblpits.length-1];
+              pitSet=true;
+              break;
+            }
+          }
+          loops++;
+          console.log("loop");
+          console.log(pitToPlay);
+        }
     }
 
     let row = this.getModel().getPlayer2Pits();
 
     let turnOver = this.moveStones(pitToPlay);
-    console.log("turnover");
-    console.log(turnOver);
 
     if (turnOver || this.isRowEmpty(row)) {
       this.switchTurn();
-      console.log("switch");
     } else {
-      console.log("keep");
       this.ai_play(0);
     }
 

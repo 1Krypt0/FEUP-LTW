@@ -14,7 +14,7 @@ function login() {
         processLogin(result);
     });
 
-    document.getElementById("username").innerHTML="<h2>" + nick + "</h2>";;
+    document.getElementById("username").innerHTML=String(nick);
     let scores = document.getElementById("scores_d");
     let ngames = parseInt(localStorage.getItem(nick+"-nr_games"));
 

@@ -76,7 +76,12 @@ export function playGame(size, seeds) {
               console.log(game.getModel().getCurrentPlayer());
               if(document.getElementById("ai_mode").checked && game.getModel().getCurrentPlayer()=="two" && waitingForMove){
                 console.log("entered");
-                game.getController().ai_play(0);
+                if(document.getElementById("ai_intelligence").checked){
+                  game.getController().ai_play(1);
+                }
+                else{
+                  game.getController().ai_play(0);
+                }
               }
           }
           
@@ -129,16 +134,65 @@ export function playGame(size, seeds) {
     };
 
     document.getElementById("reset").addEventListener('click', function() { 
-      leaveGame(nick, pass, game);
+      if(document.getElementById("pvp_mode").checked){
+        leaveGame(GAME_ID,nick,pass);
+      }
+      else{
+        leaveGameOff(game);
+      }
     });
 }
 
-function leaveGame(nickname, password, game) {
-  //player wins
-  /*if(game.getModel().getCurrentPlayer()=="two"){
-    game.getController().switchTurn()
-  }*/
 
+
+function leaveGame() {
+  if(document.getElementById("pvp_mode").checked){
+    const data = {
+        game: GAME_ID,
+        nick: nick,
+        password: pass,
+    };
+
+    const request = new MyRequest("POST", "leave", data);
+
+    let response = request.sendRequest();
+
+    response.then((result) => {
+        processLeave(result);
+    });
+  }
+}
+
+
+function processLeave(result){
+  if (isEmpty(result)){
+    let status = document.querySelector(".status");
+
+    if (game.getController().getScore(1) > game.getController().getScore(2)) {
+      status.innerHTML = "Player one wins!";
+    } else if (game.getController().getScore(2) > game.getController().getScore(1)) {
+      status.innerHTML = "Player two wins!";
+    } else {
+      status.innerHTML = "Draw!";
+    }
+    game.getController().addScoreStorage();
+
+    //initiate new game
+    //get 6 and 4 from  config
+    //create new board
+    //let board = new Board(6, 4);
+    //board.render();
+
+    //ver configs e correr novo jogo
+    playGame(6, 4);
+  }
+  else{
+    console.log(game);
+    console.log("Error: " + result.error);
+  }
+}
+
+function leaveGameOff(game){
   let status = document.querySelector(".status");
 
   if (game.getController().getScore(1) > game.getController().getScore(2)) {
@@ -150,8 +204,6 @@ function leaveGame(nickname, password, game) {
   }
   game.getController().addScoreStorage();
 
-  //send leave request
-
   //initiate new game
   //get 6 and 4 from  config
   //create new board
@@ -161,3 +213,4 @@ function leaveGame(nickname, password, game) {
   //ver configs e correr novo jogo
   playGame(6, 4);
 }
+
