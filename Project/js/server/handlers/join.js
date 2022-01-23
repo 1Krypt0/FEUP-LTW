@@ -1,7 +1,7 @@
 const fs = require("fs");
 const crypto = require("crypto");
 
-import { Game } from "../game/game";
+const play = require("../game/game");
 
 exports.PLAYER_1 = null;
 exports.PLAYER_2 = null;
@@ -33,7 +33,7 @@ exports.handleJoin = function (body) {
     if (PLAYER_1 !== data.nick) {
       PLAYER_2 = data.nick;
 
-      exports.GAME = new Game(
+      exports.GAME = new play.Game(
         data.size,
         data.initial,
         exports.PLAYER_1,

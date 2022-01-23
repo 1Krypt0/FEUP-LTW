@@ -1,10 +1,10 @@
-import { Mancala } from "../model/model";
-import { MancalaController } from "../controller/controller";
+const mancalaModel = require("../model/model");
+const mancalaController = require("../controller/controller");
 
 export class Game {
   constructor(size, seeds, player1, player2) {
-    this.model_ = new Mancala(size, seeds, player1, player2);
-    this.controller_ = new MancalaController(this.model_);
+    this.model_ = new mancalaModel.Mancala(size, seeds, player1, player2);
+    this.controller_ = new mancalaController.MancalaController(this.model_);
   }
 
   getModel() {
