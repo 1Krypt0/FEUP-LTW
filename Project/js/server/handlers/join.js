@@ -1,8 +1,11 @@
 const fs = require("fs");
 const crypto = require("crypto");
 
+import { Game } from "../game/game";
+
 exports.PLAYER_1 = null;
 exports.PLAYER_2 = null;
+exports.GAME = null;
 
 exports.handleJoin = function (body) {
   const data = JSON.parse(body);
@@ -30,7 +33,12 @@ exports.handleJoin = function (body) {
     if (PLAYER_1 !== data.nick) {
       PLAYER_2 = data.nick;
 
-      //TODO: Create a game
+      exports.GAME = new Game(
+        data.size,
+        data.initial,
+        exports.PLAYER_1,
+        exports.PLAYER_2
+      );
 
       return [{ game: GAME_HASH }, 200];
     } else {
