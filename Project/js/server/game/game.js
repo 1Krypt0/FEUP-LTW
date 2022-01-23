@@ -1,7 +1,7 @@
 const mancalaModel = require("../model/model");
 const mancalaController = require("../controller/controller");
 
-export class Game {
+class Game {
   constructor(size, seeds, player1, player2) {
     this.model_ = new mancalaModel.Mancala(size, seeds, player1, player2);
     this.controller_ = new mancalaController.MancalaController(this.model_);
@@ -15,3 +15,5 @@ export class Game {
     return this.controller_;
   }
 }
+
+exports.Game = Game;

@@ -1,4 +1,4 @@
-export class MancalaController {
+class MancalaController {
   constructor(model) {
     this.model_ = model;
   }
