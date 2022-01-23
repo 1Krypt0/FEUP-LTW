@@ -1,7 +1,7 @@
 const fs = require("fs");
 const crypto = require("crypto");
 
-const GAME_STARTED = null;
+let CAN_GAME_START = false;
 let PLAYER_1 = null;
 let PLAYER_2 = null;
 
@@ -25,6 +25,27 @@ exports.handleJoin = function (body) {
     return [{ error: "Board size not defined" }, 400];
   }
 
+  const GAME_HASH = createGameHash(data.group, data.initial, data.size);
+
+  if (PLAYER_1 === null && PLAYER_2 === null) {
+    PLAYER_1 = data.nick;
+    return [{ game: GAME_HASH }, 200];
+  }
+
+  if (PLAYER_1 !== null && PLAYER_2 === null) {
+    if (PLAYER_1 !== data.nick) {
+      PLAYER_2 = data.nick;
+      CAN_GAME_START = true;
+      return [{ game: GAME_HASH }, 200];
+    } else {
+      return [{ error: "User already playing" }, 400];
+    }
+  }
+
+  return [{ error: "Game already has two players" }, 400];
+};
+
+function createGameHash(group, initial, size) {
   const currentDate = new Date();
   const time =
     currentDate.getFullYear().toString() +
@@ -33,16 +54,8 @@ exports.handleJoin = function (body) {
     currentDate.getHours().toString() +
     currentDate.getMinutes().toString();
 
-  const GAME_DATA =
-    data.group.toString() +
-    data.nick +
-    data.password +
-    data.initial.toString() +
-    data.size.toString() +
-    time;
+  const gameData =
+    group.toString() + initial.toString() + size.toString() + time;
 
-  const GAME_HASH = crypto.createHash("md5").update(GAME_DATA).digest("hex");
-  console.log(GAME_HASH);
-
-  return [{}, 200];
-};
+  return crypto.createHash("md5").update(gameData).digest("hex");
+}
