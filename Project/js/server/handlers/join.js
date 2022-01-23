@@ -1,4 +1,9 @@
 const fs = require("fs");
 const crypto = require("crypto");
 
-exports.handleJoin = function (body) {};
+const GAME_STARTED = null;
+
+exports.handleJoin = function (body) {
+  console.log(body);
+  return [{}, 200];
+};
