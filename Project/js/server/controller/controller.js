@@ -184,3 +184,5 @@ export class MancalaController {
     }
   }
 }
+
+exports.MancalaController = MancalaController;

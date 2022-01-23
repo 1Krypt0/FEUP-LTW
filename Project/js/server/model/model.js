@@ -1,4 +1,4 @@
-export class Mancala {
+class Mancala {
   constructor(size, seeds, player1, player2) {
     this.size_ = Number(size);
 
@@ -117,3 +117,5 @@ export class Mancala {
     }
   }
 }
+
+exports.Mancala = Mancala;
