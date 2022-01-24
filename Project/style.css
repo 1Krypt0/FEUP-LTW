@@ -148,6 +148,17 @@ li > h2 {
   color: #d70026;
 }
 
+#page-center {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+#center-main {
+  display: flex;
+}
+
 .seed {
   background: radial-gradient(rgb(180, 42, 42, 1), #812d2a);
   height: 22px;
