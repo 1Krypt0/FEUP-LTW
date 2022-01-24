@@ -40,6 +40,10 @@ module.exports.handleNotify = function (body) {
     move += game.GAME.getModel().getSize() + 1;
   }
 
+  if (game.GAME.getModel().getStones(move) === 0) {
+    return [{ error: "Empty pit" }, 400];
+  }
+
   makeMove(game.GAME, move);
   return [{}, 200];
 };
