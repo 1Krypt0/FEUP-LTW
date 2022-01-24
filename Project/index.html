@@ -209,28 +209,31 @@
           </ul>
         </nav>
       </header>
-      <section data-player="one">
-        <div class="board">
-          <div class="storeAndTracker">
-            <div class="tracker player-two"></div>
-            <div class="player-two store"></div>
-          </div>
-          <div class="rows">
-            <div class="row player-two"></div>
-            <div class="row player-one"></div>
-          </div>
-          <div class="storeAndTracker">
-            <div class="player-one store"></div>
-            <div class="tracker player-one"></div>
+      <section id="page-center" data-player="one">
+        <div id="center-main">
+          <canvas id="canvas" width="400" height="400">
+            <script src="./js/canvas/canvas.js"></script>
+          </canvas>
+          <div class="board">
+            <div class="storeAndTracker">
+              <div class="tracker player-two"></div>
+              <div class="player-two store"></div>
+            </div>
+            <div class="rows">
+              <div class="row player-two"></div>
+              <div class="row player-one"></div>
+            </div>
+            <div class="storeAndTracker">
+              <div class="player-one store"></div>
+              <div class="tracker player-one"></div>
+            </div>
           </div>
         </div>
         <h2 class="status">
           It is player <span class="current-player">one</span>'s turn
         </h2>
-        <div id = username></div>
-        <div id = "scores">
-            Scores
-        </div>
+        <div id="username"></div>
+        <div id="scores">Scores</div>
       </section>
     </main>
   </body>
