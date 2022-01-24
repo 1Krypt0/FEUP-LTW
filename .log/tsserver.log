@@ -1,43 +1,114 @@
-Info 0    [08:41:20.602] Starting TS Server
-Info 1    [08:41:20.602] Version: 4.5.5
-Info 2    [08:41:20.602] Arguments: /usr/bin/node /usr/lib/node_modules/typescript/lib/tsserver.js --logFile /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/ec015e283c8017d80061beeb15d9cf84/tscancellation*
-Info 3    [08:41:20.602] Platform: linux NodeVersion: 16 CaseSensitive: true
-Info 4    [08:41:20.602] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
-Info 5    [08:41:20.622] Format host information updated
-Info 6    [08:41:20.627] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/canvas
-Info 7    [08:41:20.628] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/canvas/canvas.js :: No config files found.
-Info 8    [08:41:20.634] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
-Info 9    [08:41:21.738] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 1103.6395340003073ms
-Info 10   [08:41:21.738] Project '/dev/null/inferredProject1*' (Inferred)
-Info 11   [08:41:21.738] 	Files (22)
+Info 0    [09:25:16.519] Starting TS Server
+Info 1    [09:25:16.520] Version: 4.5.5
+Info 2    [09:25:16.520] Arguments: /usr/bin/node /usr/lib/node_modules/typescript/lib/tsserver.js --logFile /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/42aa55465f7727dd92e517f4d954e791/tscancellation*
+Info 3    [09:25:16.520] Platform: linux NodeVersion: 16 CaseSensitive: true
+Info 4    [09:25:16.520] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [09:25:16.532] Format host information updated
+Info 6    [09:25:16.535] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/controller
+Info 7    [09:25:16.535] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/controller/controller.js :: No config files found.
+Info 8    [09:25:16.539] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 9    [09:25:17.814] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 1274.3976809997112ms
+Info 10   [09:25:17.814] Project '/dev/null/inferredProject1*' (Inferred)
+Info 11   [09:25:17.814] 	Files (22)
 
-Info 12   [08:41:21.738] -----------------------------------------------
-Info 13   [08:42:31.460] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
-Info 14   [08:42:31.482] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 2 structureChanged: false structureIsReused:: Completely Elapsed: 21.64602900017053ms
-Info 15   [08:42:31.482] Different program with same set of files
-Info 16   [08:44:02.163] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
-Info 17   [08:44:02.188] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 3 structureChanged: false structureIsReused:: Completely Elapsed: 24.92980800010264ms
-Info 18   [08:44:02.188] Different program with same set of files
-Info 19   [08:44:42.776] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
-Info 20   [08:44:42.802] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 4 structureChanged: false structureIsReused:: Completely Elapsed: 25.111496000550687ms
-Info 21   [08:44:42.802] Different program with same set of files
-Info 22   [08:49:18.086] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/server
-Info 23   [08:49:18.086] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/server/index.js :: No config files found.
-Info 24   [08:49:18.087] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
-Info 25   [08:49:18.720] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 632.2585909999907ms
-Info 26   [08:49:18.720] Project '/dev/null/inferredProject2*' (Inferred)
-Info 27   [08:49:18.720] 	Files (105)
+Info 12   [09:25:17.814] -----------------------------------------------
+Info 13   [09:25:32.359] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/game
+Info 14   [09:25:32.359] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/game/game.js :: No config files found.
+Info 15   [09:25:32.360] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
+Info 16   [09:25:32.390] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 30.705804999917746ms
+Info 17   [09:25:32.390] Project '/dev/null/inferredProject2*' (Inferred)
+Info 18   [09:25:32.390] 	Files (24)
 
-Info 28   [08:49:18.720] -----------------------------------------------
-Info 29   [08:49:18.977] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
-Info 30   [08:49:19.377] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 2 structureChanged: true structureIsReused:: Not Elapsed: 400.21294800005853ms
-Info 31   [08:49:19.377] Project '/dev/null/inferredProject2*' (Inferred)
-Info 32   [08:49:19.377] 	Files (112)
+Info 19   [09:25:32.391] -----------------------------------------------
+Info 20   [09:25:32.392] `remove Project::
+Info 21   [09:25:32.392] Project '/dev/null/inferredProject1*' (Inferred)
+Info 22   [09:25:32.392] 	Files (22)
 
-Info 33   [08:49:19.377] -----------------------------------------------
-Info 34   [08:49:21.325] Before ensureProjectForOpenFiles:
-Info 35   [08:49:21.325] After ensureProjectForOpenFiles:
-Info 36   [08:49:21.325] got projects updated in background, updating diagnostics for /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/canvas/canvas.js,/home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/server/index.js
-Info 37   [08:52:56.939] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
-Info 38   [08:52:56.966] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 3 structureChanged: false structureIsReused:: Completely Elapsed: 26.434884000569582ms
-Info 39   [08:52:56.966] Different program with same set of files
+Info 23   [09:25:32.392] -----------------------------------------------
+Info 24   [09:25:35.868] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/model
+Info 25   [09:25:35.868] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/model/model.js :: No config files found.
+Info 26   [09:25:55.248] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers
+Info 27   [09:25:55.249] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers/join.js :: No config files found.
+Info 28   [09:25:55.249] Starting updateGraphWorker: Project: /dev/null/inferredProject3*
+Info 29   [09:25:55.881] Finishing updateGraphWorker: Project: /dev/null/inferredProject3* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 631.4355650004ms
+Info 30   [09:25:55.881] Project '/dev/null/inferredProject3*' (Inferred)
+Info 31   [09:25:55.881] 	Files (101)
+
+Info 32   [09:25:55.881] -----------------------------------------------
+Info 33   [09:25:55.882] `remove Project::
+Info 34   [09:25:55.882] Project '/dev/null/inferredProject2*' (Inferred)
+Info 35   [09:25:55.882] 	Files (24)
+
+Info 36   [09:25:55.882] -----------------------------------------------
+Info 37   [09:26:01.502] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers
+Info 38   [09:26:01.503] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers/notify.js :: No config files found.
+Info 39   [09:26:01.503] Starting updateGraphWorker: Project: /dev/null/inferredProject4*
+Info 40   [09:26:01.558] Finishing updateGraphWorker: Project: /dev/null/inferredProject4* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 55.245647999458015ms
+Info 41   [09:26:01.558] Project '/dev/null/inferredProject4*' (Inferred)
+Info 42   [09:26:01.558] 	Files (102)
+
+Info 43   [09:26:01.558] -----------------------------------------------
+Info 44   [09:26:01.559] `remove Project::
+Info 45   [09:26:01.559] Project '/dev/null/inferredProject3*' (Inferred)
+Info 46   [09:26:01.559] 	Files (101)
+
+Info 47   [09:26:01.559] -----------------------------------------------
+Info 48   [09:26:01.704] Starting updateGraphWorker: Project: /dev/null/inferredProject4*
+Info 49   [09:26:01.964] Finishing updateGraphWorker: Project: /dev/null/inferredProject4* Version: 2 structureChanged: true structureIsReused:: Not Elapsed: 259.9779770001769ms
+Info 50   [09:26:01.964] Project '/dev/null/inferredProject4*' (Inferred)
+Info 51   [09:26:01.964] 	Files (109)
+
+Info 52   [09:26:01.964] -----------------------------------------------
+Info 53   [09:26:04.165] Before ensureProjectForOpenFiles:
+Info 54   [09:26:04.165] After ensureProjectForOpenFiles:
+Info 55   [09:26:04.166] got projects updated in background, updating diagnostics for /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers/join.js,/home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers/notify.js
+Info 56   [09:26:08.276] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers
+Info 57   [09:26:08.276] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers/ranking.js :: No config files found.
+Info 58   [09:26:08.276] Starting updateGraphWorker: Project: /dev/null/inferredProject5*
+Info 59   [09:26:08.315] Finishing updateGraphWorker: Project: /dev/null/inferredProject5* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 38.38737099990249ms
+Info 60   [09:26:08.315] Project '/dev/null/inferredProject5*' (Inferred)
+Info 61   [09:26:08.315] 	Files (98)
+
+Info 62   [09:26:08.315] -----------------------------------------------
+Info 63   [09:26:13.558] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers
+Info 64   [09:26:13.558] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers/register.js :: No config files found.
+Info 65   [09:26:13.559] Starting updateGraphWorker: Project: /dev/null/inferredProject6*
+Info 66   [09:26:13.612] Finishing updateGraphWorker: Project: /dev/null/inferredProject6* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 53.822753000073135ms
+Info 67   [09:26:13.612] Project '/dev/null/inferredProject6*' (Inferred)
+Info 68   [09:26:13.613] 	Files (98)
+
+Info 69   [09:26:13.613] -----------------------------------------------
+Info 70   [09:26:28.710] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project
+Info 71   [09:26:28.710] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/index.js :: No config files found.
+Info 72   [09:26:28.710] Starting updateGraphWorker: Project: /dev/null/inferredProject7*
+Info 73   [09:26:28.766] Finishing updateGraphWorker: Project: /dev/null/inferredProject7* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 55.57599799986929ms
+Info 74   [09:26:28.766] Project '/dev/null/inferredProject7*' (Inferred)
+Info 75   [09:26:28.766] 	Files (105)
+
+Info 76   [09:26:28.766] -----------------------------------------------
+Info 77   [09:26:28.772] `remove Project::
+Info 78   [09:26:28.772] Project '/dev/null/inferredProject4*' (Inferred)
+Info 79   [09:26:28.772] 	Files (109)
+
+Info 80   [09:26:28.772] -----------------------------------------------
+Info 81   [09:26:28.772] `remove Project::
+Info 82   [09:26:28.772] Project '/dev/null/inferredProject5*' (Inferred)
+Info 83   [09:26:28.772] 	Files (98)
+
+Info 84   [09:26:28.772] -----------------------------------------------
+Info 85   [09:26:28.773] `remove Project::
+Info 86   [09:26:28.773] Project '/dev/null/inferredProject6*' (Inferred)
+Info 87   [09:26:28.773] 	Files (98)
+
+Info 88   [09:26:28.773] -----------------------------------------------
+Info 89   [09:26:28.911] Starting updateGraphWorker: Project: /dev/null/inferredProject7*
+Info 90   [09:26:29.225] Finishing updateGraphWorker: Project: /dev/null/inferredProject7* Version: 2 structureChanged: true structureIsReused:: Not Elapsed: 313.8317320002243ms
+Info 91   [09:26:29.225] Project '/dev/null/inferredProject7*' (Inferred)
+Info 92   [09:26:29.225] 	Files (112)
+
+Info 93   [09:26:29.225] -----------------------------------------------
+Info 94   [09:26:31.382] Before ensureProjectForOpenFiles:
+Info 95   [09:26:31.382] After ensureProjectForOpenFiles:
+Info 96   [09:26:31.382] got projects updated in background, updating diagnostics for /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers/notify.js,/home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers/ranking.js,/home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/index.js
+Info 97   [09:26:34.731] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers
+Info 98   [09:26:34.731] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/handlers/join.js :: No config files found.
