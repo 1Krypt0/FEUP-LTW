@@ -14,12 +14,14 @@ function login() {
     processLogin(result);
   });
 
-  document.getElementById("username").innerHTML=getLoginUserData().nick;
-  let scores = document.getElementById("scores");
-  for(let i=1; i <= parseInt(localStorage.getItem(getLoginUserData().nick+"-nr_games")) ; i++){
-    let newscore=document.createElement('div');
-    newscore.innerHTML= localStorage.getItem(username+"-g-"+i);
-    scores.appendChild(newscore);
+  document.getElementById("username").innerHTML=String(nick);
+  let scores = document.getElementById("scores_d");
+  let ngames = parseInt(localStorage.getItem(nick+"-nr_games"));
+
+  for(let i=1;i<=ngames;i++){
+    let sc=document.createElement('div');
+    sc.innerHTML=JSON.parse(localStorage.getItem(nick+"-g-"+String(i)));
+    scores.appendChild(sc);
   }
 }
 
