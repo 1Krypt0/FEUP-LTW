@@ -9,7 +9,7 @@ exports.handleRegister = function (body) {
   for (const key in data) {
     if (key === "nick") {
       nick = data[key];
-    } else if (key === "pass") {
+    } else if (key === "password") {
       pass = data[key];
     } else {
       return [{ error: "Invalid parameter in request" }, 400];

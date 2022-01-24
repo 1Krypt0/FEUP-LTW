@@ -2,6 +2,7 @@ const http = require("http");
 const register = require("./handlers/register");
 const ranking = require("./handlers/ranking");
 const join = require("./handlers/join");
+const notify = require("./handlers/notify");
 const PORT = 9047;
 
 class Server {
@@ -90,7 +91,15 @@ class Server {
         handleLeave();
         break;
       case "/notify":
-        handleNotify();
+        response = notify.handleNotify(body);
+        res.writeHead(response[1], {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(response[0]), () => {
+          res.end();
+        });
         break;
       case "/ranking":
         response = ranking.handleRanking();
@@ -111,7 +120,6 @@ class Server {
           "Access-Control-Allow-Headers": "*",
           "Access-Control-Allow-Origin": "*",
         });
-
         res.write(JSON.stringify(response[0]), () => {
           res.end();
         });

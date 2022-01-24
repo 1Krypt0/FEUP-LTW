@@ -1,41 +1,46 @@
-const fs = require("fs");
 const crypto = require("crypto");
+const Game = require("../game/game");
 
-let CAN_GAME_START = false;
-let PLAYER_1 = null;
-let PLAYER_2 = null;
+module.exports.PLAYER_1 = null;
+module.exports.PLAYER_2 = null;
+module.exports.GAME = null;
 
-exports.handleJoin = function (body) {
+module.exports.handleJoin = function (body) {
   const data = JSON.parse(body);
 
   if (data.group === undefined) {
-    console.log("Group not defined");
     return [{ error: "Group not defined" }, 400];
   } else if (data.nick === undefined) {
-    console.log("User not defined");
     return [{ error: "User not defined" }, 400];
   } else if (data.password === undefined) {
-    console.log("Password not defined");
     return [{ error: "Password not defined" }, 400];
   } else if (data.initial === undefined) {
-    console.log("Initial seed amount not defined");
     return [{ error: "Initial seed amount not defined" }, 400];
   } else if (data.size === undefined) {
-    console.log("Board size not defined");
     return [{ error: "Board size not defined" }, 400];
   }
 
   const GAME_HASH = createGameHash(data.group, data.initial, data.size);
 
-  if (PLAYER_1 === null && PLAYER_2 === null) {
-    PLAYER_1 = data.nick;
+  if (module.exports.PLAYER_1 === null && module.exports.PLAYER_2 === null) {
+    module.exports.PLAYER_1 = data.nick;
     return [{ game: GAME_HASH }, 200];
   }
 
-  if (PLAYER_1 !== null && PLAYER_2 === null) {
-    if (PLAYER_1 !== data.nick) {
-      PLAYER_2 = data.nick;
-      CAN_GAME_START = true;
+  if (module.exports.PLAYER_1 !== null && module.exports.PLAYER_2 === null) {
+    if (module.exports.PLAYER_1 !== data.nick) {
+      module.exports.PLAYER_2 = data.nick;
+
+      module.exports.GAME = new Game(
+        data.size,
+        data.initial,
+        module.exports.PLAYER_1,
+        module.exports.PLAYER_2
+      );
+
+      console.log("Game on join");
+      console.log(module.exports.GAME);
+
       return [{ game: GAME_HASH }, 200];
     } else {
       return [{ error: "User already playing" }, 400];
