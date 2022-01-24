@@ -6,54 +6,57 @@ let nick = null;
 let pass = null;
 
 function login() {
-    const request = new MyRequest("POST", "register", getLoginUserData());
+  const request = new MyRequest("POST", "register", getLoginUserData());
 
-    let response = request.sendRequest();
+  let response = request.sendRequest();
 
-    response.then(function (result) {
-        processLogin(result);
-    });
+  response.then(function (result) {
+    processLogin(result);
+  });
+
+  document.getElementById("username").innerHTML=getLoginUserData().nick;
+  let scores = document.getElementById("scores");
+  for(let i=1; i <= parseInt(localStorage.getItem(getLoginUserData().nick+"-nr_games")) ; i++){
+    let newscore=document.createElement('div');
+    newscore.innerHTML= localStorage.getItem(username+"-g-"+i);
+    scores.appendChild(newscore);
+  }
 }
 
 function getLoginUserData() {
-    const username = document.getElementById("username-login");
-    const password = document.getElementById("password-login");
+  const username = document.getElementById("username-login");
+  const password = document.getElementById("password-login");
 
-    const data = {
-        nick: username.value,
-        password: password.value,
-    };
+  const data = {
+    nick: username.value,
+    password: password.value,
+  };
 
-    nick = username.value;
-    pass = password.value;
+  nick = username.value;
+  pass = password.value;
 
-    return data;
+  return data;
 }
 
 function processLogin(result) {
-    const authModal = document.getElementById("auth-modal");
-    const paramsModal = document.getElementById("myModal");
-    if (isEmpty(result)) {
-        const navbar = document.getElementById("navbar");
-        let name = document.createElement("li");
-        name.innerHTML = "<h2>" + getLoginUserData().nick + "</h2>";
-        navbar.appendChild(name);
+  const authModal = document.getElementById("auth-modal");
+  const paramsModal = document.getElementById("myModal");
+  if (isEmpty(result)) {
+    authModal.style.display = "none";
+    paramsModal.style.display = "block";
+  } else {
+    const form = document.getElementById("login-form");
+    const error = document.createElement("span");
+    error.innerHTML = "Wrong username and Password combination";
 
-        authModal.style.display = "none";
-        paramsModal.style.display = "block";
-    } else {
-        const form = document.getElementById("login-form");
-        const error = document.createElement("span");
-        error.innerHTML = "Wrong username and Password combination";
-
-        form.appendChild(error);
-    }
+    form.appendChild(error);
+  }
 }
 
 function isEmpty(obj) {
-    return Object.keys(obj).length === 0;
+  return Object.keys(obj).length === 0;
 }
 
 loginButton.onclick = login;
 
-export { nick, pass };
+export { nick, pass, isEmpty };
