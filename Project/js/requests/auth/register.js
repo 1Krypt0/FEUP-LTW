@@ -8,10 +8,11 @@ function register() {
 
   let response = request.sendRequest();
 
-    response.then(function (result) {
-        processRegister(result);
-    });
-    localStorage.setItem(getRegisterUserData().nick+"-nr_games",JSON.stringify(0));
+  response.then(function (result) {
+    processRegister(result);
+  });
+
+  localStorage.setItem(getRegisterUserData().nick+"-nr_games",0);
 }
 
 function processRegister(result) {

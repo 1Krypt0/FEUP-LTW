@@ -182,12 +182,6 @@ function processLeave(result){
     }
     game.getController().addScoreStorage();
 
-    //initiate new game
-    //get 6 and 4 from  config
-    //create new board
-    //let board = new Board(6, 4);
-    //board.render();
-
     //ver configs e correr novo jogo
     playGame(6, 4);
   }

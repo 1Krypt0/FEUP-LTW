@@ -1,4 +1,8 @@
 const http = require("http");
+const register = require("./handlers/register");
+const ranking = require("./handlers/ranking");
+const join = require("./handlers/join");
+const notify = require("./handlers/notify");
 const PORT = 9047;
 
 class Server {
@@ -15,17 +19,35 @@ class Server {
           this.handleGET(request, response);
           break;
         case "POST":
-          this.handlePOST(request, response);
+          let body = "";
+          request.on("data", (chunk) => {
+            body += chunk;
+          });
+          request.on("end", () => {
+            this.handlePOST(request, response, body);
+          });
+          break;
+        case "OPTIONS":
+          response.writeHead(200, {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+          });
+          response.end();
           break;
         default:
-          response.writeHead(404, "Unknown Request.");
+          response.writeHead(404, {
+            "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "*",
+            "Access-Control-Allow-Origin": "*",
+          });
+          response.end();
           break;
       }
-      response.end();
     });
   }
 
-  listen() {
+  listen(PORT) {
     this.server.listen(PORT);
   }
 
@@ -39,33 +61,81 @@ class Server {
         const error = {
           error: "Invalid GET Request",
         };
-        res.write(JSON.stringify(error));
+        res.writeHead(404, {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(error), () => {
+          res.end();
+        });
     }
   }
 
-  handlePOST(req, res) {
+  handlePOST(req, res, body) {
     const url = req.url.split("?")[0];
+    let response;
     switch (url) {
       case "/join":
-        handleJoin();
+        response = join.handleJoin(body);
+        res.writeHead(response[1], {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(response[0]), () => {
+          res.end();
+        });
         break;
       case "/leave":
         handleLeave();
         break;
       case "/notify":
-        handleNotify();
+        response = notify.handleNotify(body);
+        res.writeHead(response[1], {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(response[0]), () => {
+          res.end();
+        });
         break;
       case "/ranking":
-        handleRanking();
+        response = ranking.handleRanking();
+        res.writeHead(response[1], {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(response[0]), () => {
+          res.end();
+        });
         break;
       case "/register":
-        handleRegister();
+        console.log(body);
+        response = register.handleRegister(body);
+        res.writeHead(response[1], {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(response[0]), () => {
+          res.end();
+        });
         break;
       default:
         const error = {
           error: "Invalid POST Request",
         };
-        res.write(JSON.stringify(error));
+        res.writeHead(404, {
+          "Content-Type": "application/json",
+          "Access-Control-Allow-Headers": "*",
+          "Access-Control-Allow-Origin": "*",
+        });
+        res.write(JSON.stringify(error), () => {
+          res.end();
+        });
     }
   }
 }

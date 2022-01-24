@@ -1,4 +1,4 @@
-const URL = "http://twserver.alunos.dcc.fc.up.pt:8008/";
+const URL = "http://twserver.alunos.dcc.fc.up.pt:9047/";
 
 class MyRequest {
   constructor(method, url, obj) {
@@ -34,7 +34,6 @@ class MyRequest {
             console.log("Error:", event);
           };
         }
-
       } catch (error) {
         console.log("Error:", error);
       }
@@ -44,11 +43,12 @@ class MyRequest {
           eventSource.close();
           this.ESListen=false;
         }
-
         const response_1 = await fetch(URL + this.url_, {
           method: "POST",
           headers: {
             "Content-Type": "application/json",
+            "Access-Control-Allow-Headers": "Access-Control-Allow-Origin",
+            "Access-Control-Allow-Origin": "*",
           },
           body: JSON.stringify(this.obj_),
         });
