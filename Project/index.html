@@ -7,9 +7,11 @@
     <link rel="stylesheet" href="style.css" />
     <script src="js/modal/instructions-modal.js" defer></script>
     <script src="./js/modal/auth-modal.js" defer></script>
+    <script src="./js/modal/scores-modal.js" defer></script>
     <script type="module" src="./js/requests/auth/login.js" defer></script>
     <script type="module" src="./js/requests/auth/register.js" defer></script>
     <script type="module" src="./js/requests/join.js"></script>
+    <script type="module" src="./js/requests/ranking.js"></script>
   </head>
   <body>
     <main id="main">
@@ -77,14 +79,86 @@
               <label for="pitNo">Pits for each player</label>
             </div>
             <br />
+            <script>
+              function onlyOne(cb) {
+                let cbs = document.getElementsByName("check");
+                cbs.forEach((item) => {
+                  if (item !== cb) {
+                    item.checked = false;
+                  }
+                });
+              }
+            </script>
             <div class="input-container">
-              <input type="number" name="seedNo" id="seedNo" placeholder="4" />
+              <input
+                type="number"
+                name="check"
+                id="seedNo"
+                placeholder="4"
+                onclick="(function(){onlyOne(this);})"
+              />
               <label for="seedNo">Seeds on each pit</label>
+            </div>
+            <div class="input-container">
+              <input
+                type="checkbox"
+                name="check"
+                id="ai_mode"
+                onclick="onlyOne(this)"
+              />
+              <label for="ai_mode">AI mode</label>
+            </div>
+            <div class="input-container">
+              <input
+                type="checkbox"
+                name="check"
+                id="pvp_mode"
+                onclick="onlyOne(this)"
+                checked
+              />
+              <label for="seedNo">PVP mode</label>
+            </div>
+            <div class="input-container">
+              <input
+                type="checkbox"
+                name="check"
+                id="local_mode"
+                onclick="onlyOne(this)"
+              />
+              <label for="local_mode">Local mode</label>
+            </div>
+            <div class="input-container">
+              <input type="checkbox" name="check" id="ai_intelligence" />
+              <label for="ai_intelligence">Smart AI</label>
             </div>
             <br />
             <br />
             <button type="button" id="parameters">Submit</button>
           </form>
+        </article>
+      </section>
+      <section id="scores-modal" class="modal">
+        <article class="modal-content">
+          <span class="modal-close" id="scores-modal-close">×</span>
+          <div class="scores-content">
+            <h2 id="scores-header">Scores</h2>
+            <div id="scores_d"></div>
+          </div>
+        </article>
+      </section>
+      <section id="ranking-modal" class="modal">
+        <article class="modal-content">
+          <span class="modal-close" id="ranking-modal-close">×</span>
+          <div class="ranking-content">
+            <h2 id="ranking-header">Online Ranking</h2>
+            <table id="ranking-table">
+              <tr>
+                <th>Name</th>
+                <th>Games</th>
+                <th>Victories</th>
+              </tr>
+            </table>
+          </div>
         </article>
       </section>
       <section id="instructions-modal" class="modal">
@@ -201,10 +275,16 @@
               <a id="instructions" href="#">Instructions</a>
             </li>
             <li>
-              <a id="scoreboard" href="#">Scoreboard</a>
+              <a id="scoreboard" href="#">Online Scoreboard</a>
+            </li>
+            <li>
+              <a id="scores" href="#">Local Scores</a>
             </li>
             <li>
               <a href="#">Logout</a>
+            </li>
+            <li>
+              <h2 id="username"></h2>
             </li>
           </ul>
         </nav>
@@ -232,6 +312,7 @@
             Scores
         </div>
       </section>
+      <button class="footerbutton" id="reset">End Game</button>
     </main>
   </body>
 </html>
