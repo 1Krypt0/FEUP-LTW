@@ -18,7 +18,7 @@ class MyRequest {
         let urlencoded = "?nick=" + String(this.obj_.nick) + "&game=" + String(this.obj_.game);
 
         if(!this.ESListen){
-          const eventSource = new EventSource("http://twserver.alunos.dcc.fc.up.pt:8008/" + this.url_ + urlencoded); //no inicio
+          const eventSource = new EventSource(URL + this.url_ + urlencoded); //no inicio
 
           eventSource.onstart = function () {
             console.log("Connection with server established");
