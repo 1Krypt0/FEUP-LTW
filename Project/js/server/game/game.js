@@ -1,19 +1,15 @@
-const mancalaModel = require("../model/model");
-const mancalaController = require("../controller/controller");
+const Model = require("../model/model");
+const MancalaController = require("../controller/controller");
 
-class Game {
-  constructor(size, seeds, player1, player2) {
-    this.model_ = new mancalaModel.Mancala(size, seeds, player1, player2);
-    this.controller_ = new mancalaController.MancalaController(this.model_);
-  }
+module.exports = function (size, seeds, player1, player2) {
+  this.model_ = new Model(size, seeds, player1, player2);
+  this.controller_ = new MancalaController(this.model_);
 
-  getModel() {
+  this.getModel = () => {
     return this.model_;
-  }
+  };
 
-  getController() {
+  this.getController = () => {
     return this.controller_;
-  }
-}
-
-exports.Game = Game;
+  };
+};

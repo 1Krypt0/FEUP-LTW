@@ -1,13 +1,11 @@
-const fs = require("fs");
 const crypto = require("crypto");
+const Game = require("../game/game");
 
-const play = require("../game/game");
+module.exports.PLAYER_1 = null;
+module.exports.PLAYER_2 = null;
+module.exports.GAME = null;
 
-exports.PLAYER_1 = null;
-exports.PLAYER_2 = null;
-exports.GAME = null;
-
-exports.handleJoin = function (body) {
+module.exports.handleJoin = function (body) {
   const data = JSON.parse(body);
 
   if (data.group === undefined) {
@@ -24,21 +22,24 @@ exports.handleJoin = function (body) {
 
   const GAME_HASH = createGameHash(data.group, data.initial, data.size);
 
-  if (PLAYER_1 === null && PLAYER_2 === null) {
-    PLAYER_1 = data.nick;
+  if (module.exports.PLAYER_1 === null && module.exports.PLAYER_2 === null) {
+    module.exports.PLAYER_1 = data.nick;
     return [{ game: GAME_HASH }, 200];
   }
 
-  if (PLAYER_1 !== null && PLAYER_2 === null) {
-    if (PLAYER_1 !== data.nick) {
-      PLAYER_2 = data.nick;
+  if (module.exports.PLAYER_1 !== null && module.exports.PLAYER_2 === null) {
+    if (module.exports.PLAYER_1 !== data.nick) {
+      module.exports.PLAYER_2 = data.nick;
 
-      exports.GAME = new play.Game(
+      module.exports.GAME = new Game(
         data.size,
         data.initial,
-        exports.PLAYER_1,
-        exports.PLAYER_2
+        module.exports.PLAYER_1,
+        module.exports.PLAYER_2
       );
+
+      console.log("Game on join");
+      console.log(module.exports.GAME);
 
       return [{ game: GAME_HASH }, 200];
     } else {

@@ -1,19 +1,17 @@
-class MancalaController {
-  constructor(model) {
-    this.model_ = model;
-  }
+module.exports = function (model) {
+  this.model_ = model;
 
-  getModel() {
+  this.getModel = () => {
     return this.model_;
-  }
+  };
 
-  isRowEmpty(pits) {
+  this.isRowEmpty = (pits) => {
     return pits.every(function (stones) {
       return stones === 0;
     });
-  }
+  };
 
-  doPlayerTurn(pitNo) {
+  this.doPlayerTurn = (pitNo) => {
     let row = undefined;
     if (pitNo < this.getModel().getPlayer1StoreIdx()) {
       row = this.getModel().getPlayer1Pits();
@@ -34,13 +32,13 @@ class MancalaController {
 
     // change the player if the current turn is ended
     return false;
-  }
+  };
 
-  switchTurn() {
+  this.switchTurn = () => {
     this.getModel().setCurrentPlayer(this.getModel().getOtherPlayer());
-  }
+  };
 
-  checkGameOver() {
+  this.checkGameOver = () => {
     let winner = this.checkWinner();
 
     if (winner < 0) {
@@ -56,9 +54,9 @@ class MancalaController {
     }
 
     return true;
-  }
+  };
 
-  moveStones(pit) {
+  this.moveStones = (pit) => {
     // return if pit has no stones
     if (this.getModel().getStones(pit) < 1) {
       return false;
@@ -136,9 +134,9 @@ class MancalaController {
       pit !== this.getModel().getPlayer1StoreIdx() &&
       pit !== this.getModel().getPlayer2StoreIdx()
     );
-  }
+  };
 
-  checkWinner() {
+  this.checkWinner = () => {
     if (this.getModel().getCurrentPlayer() === "one") {
       const player2Out = this.isRowEmpty(this.getModel().getPlayer2Pits());
 
@@ -182,7 +180,5 @@ class MancalaController {
     } else {
       return 0;
     }
-  }
-}
-
-exports.MancalaController = MancalaController;
+  };
+};

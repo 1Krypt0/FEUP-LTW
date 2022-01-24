@@ -1,10 +1,9 @@
 const game = require("./join");
 
-exports.GAME_OVER = false;
+module.exports.GAME_OVER = false;
 
-exports.handleNotify = function (body) {
+module.exports.handleNotify = function (body) {
   const data = JSON.parse(body);
-  console.log(data);
 
   if (data.nick === undefined) {
     return [{ error: "User not defined" }, 400];
@@ -16,7 +15,8 @@ exports.handleNotify = function (body) {
     return [{ error: "Move not defined" }, 400];
   }
 
-  console.log(game.GAME);
+  console.log("Game on notify");
+  console.log(game);
 
   if (game.GAME === null) {
     return [{ error: "No game with ID of " + data.game }, 400];
@@ -30,7 +30,7 @@ exports.handleNotify = function (body) {
     return [{ error: "Invalid move" }, 400];
   }
 
-  const move = parseInt(data.move);
+  let move = parseInt(data.move);
 
   if (move < 0 || move >= game.GAME.getModel().getPlayer1StoreIdx()) {
     return [{ error: "Invalid move" }, 400];
@@ -45,15 +45,11 @@ exports.handleNotify = function (body) {
 };
 
 function makeMove(game, move) {
-  console.log(game.GAME);
-
-  let gameOver = game.GAME.getController().doPlayerTurn(move);
-
-  console.log(game.GAME);
+  let gameOver = game.getController().doPlayerTurn(move);
 
   if (!gameOver) {
-    game.GAME.getController().switchTurn();
+    game.getController().switchTurn();
   } else {
-    exports.GAME_OVER = true;
+    module.exports.GAME_OVER = true;
   }
 }
