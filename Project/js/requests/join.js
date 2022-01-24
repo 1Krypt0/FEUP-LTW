@@ -1,4 +1,5 @@
 import { MyRequest } from "./requests.js";
+import { update } from "../requests/update.js";
 import { nick, pass } from "./auth/login.js";
 import { Board } from "../board.js";
 import { playGame } from "../mvc/script.js";
@@ -25,6 +26,9 @@ function processJoin(result) {
     console.log(getParams());
     setGame(getParams().initial, getParams().size);
     paramsModal.style.display = "none";
+
+    //waiting for event
+    update(GAME_ID,nick);
   }
 }
 

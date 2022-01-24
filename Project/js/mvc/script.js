@@ -3,6 +3,7 @@ import { MancalaView } from "./view.js";
 import { Mancala } from "./model.js";
 import { nick, pass, isEmpty } from "../requests/auth/login.js";
 import { GAME_ID } from "../requests/join.js";
+import { update } from "../requests/update.js";
 import { MyRequest } from "../requests/requests.js";
 import { Board } from "../board.js";
 
@@ -30,8 +31,10 @@ export class Game {
   }
 }
 
+let game;
+
 export function playGame(size, seeds) {
-    let game = new Game(size, seeds);
+    game = new Game(size, seeds);
     let waitingForMove = true;
 
     game.init();
@@ -49,6 +52,8 @@ export function playGame(size, seeds) {
                     }
                 }
 
+                //waiting for event
+                update(GAME_ID,nick);
                 //leave
                 const myTimeout = setTimeout(function () {
                   leaveGame(game, nick, pass)
@@ -135,7 +140,7 @@ export function playGame(size, seeds) {
 
     document.getElementById("reset").addEventListener('click', function() { 
       if(document.getElementById("pvp_mode").checked){
-        leaveGame(GAME_ID,nick,pass);
+        leaveGame();
       }
       else{
         leaveGameOff(game);

@@ -5,6 +5,7 @@ class MyRequest {
     this.method_ = method;
     this.url_ = url;
     this.obj_ = obj;
+    this.ESListen = false;
   }
 
   async sendRequest() {
@@ -14,31 +15,36 @@ class MyRequest {
                 const data = await response_1.json();
                 return data;*/
 
-        let urlencoded = encodeURIComponent(
-          "?nick=" + String(this.obj_.game) + "&game=" + String(this.obj_.nick)
-        );
+        let urlencoded = "?nick=" + String(this.obj_.nick) + "&game=" + String(this.obj_.game);
 
-        const eventSource = new EventSource(URL + this.url_ + urlencoded); //no inicio
+        if(!this.ESListen){
+          const eventSource = new EventSource(URL + this.url_ + urlencoded); //no inicio
 
-        eventSource.onstart = function () {
-          console.log("Connection with server established");
-        };
+          eventSource.onstart = function () {
+            console.log("Connection with server established");
+          };
+        }
+        else{
+          eventSource.onmessage = function (event) {
+            const data = JSON.parse(event.data);
+            console.log(data);
+          };
 
-        eventSource.onmessage = function (event) {
-          const data = JSON.parse(event.data);
-        };
+          eventSource.onerror = function (event) {
+            console.log("Error:", event);
+          };
+        }
 
-        eventSource.onerror = function (event) {
-          console.log("Error:", event);
-        };
-        //eventSource.close();//quando terminar jogo
-
-        return data;
       } catch (error) {
         console.log("Error:", error);
       }
     } else if (this.method_ === "POST") {
       try {
+        if(this.url_ === "leave" && this.ESListen){
+          eventSource.close();
+          this.ESListen=false;
+        }
+
         const response_1 = await fetch(URL + this.url_, {
           method: "POST",
           headers: {

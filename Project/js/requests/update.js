@@ -1,26 +1,27 @@
 import { MyRequest } from "./requests.js";
-import { nick } from "./auth/login.js";
-import {GAME_ID} from "./join.js";
+import { isEmpty } from "./auth/login.js";
 
-function update() {
-    const request = new MyRequest("GET", "update", getParams());
+function processUpdate(result) {
+    if(result===undefined){
+    }
+    else{
+        console.log("Error: " + result.error);
+    }
+}
+
+function update(game_id,username) {
+    let data = {
+        game: game_id,
+        nick: username,
+    };
+    const request = new MyRequest("GET", "update", data);
 
     let response = request.sendRequest();
 
-    response.then(function (result) {
+    response.then((result) => {
         processUpdate(result);
     });
 }
 
-function getParams() {
-    let data = {
-        game: GAME_ID,
-        nick: nick,
-    };
+export {update};
 
-    return data;
-}
-
-function processUpdate(data){
-
-}
