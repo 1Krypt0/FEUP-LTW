@@ -35,7 +35,7 @@ function getParams() {
   const initial = seedInput.value === "" ? 4 : sizeInput.value;
 
   let data = {
-    grop: GROUP_ID,
+    group: GROUP_ID,
     nick: nick,
     password: pass,
     size: size,
