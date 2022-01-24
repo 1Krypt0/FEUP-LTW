@@ -1,0 +1,43 @@
+Info 0    [08:41:20.602] Starting TS Server
+Info 1    [08:41:20.602] Version: 4.5.5
+Info 2    [08:41:20.602] Arguments: /usr/bin/node /usr/lib/node_modules/typescript/lib/tsserver.js --logFile /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/.log/tsserver.log --logVerbosity info --cancellationPipeName /tmp/ec015e283c8017d80061beeb15d9cf84/tscancellation*
+Info 3    [08:41:20.602] Platform: linux NodeVersion: 16 CaseSensitive: true
+Info 4    [08:41:20.602] ServerMode: undefined syntaxOnly: false hasUnknownServerMode: undefined
+Info 5    [08:41:20.622] Format host information updated
+Info 6    [08:41:20.627] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/canvas
+Info 7    [08:41:20.628] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/canvas/canvas.js :: No config files found.
+Info 8    [08:41:20.634] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 9    [08:41:21.738] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 1103.6395340003073ms
+Info 10   [08:41:21.738] Project '/dev/null/inferredProject1*' (Inferred)
+Info 11   [08:41:21.738] 	Files (22)
+
+Info 12   [08:41:21.738] -----------------------------------------------
+Info 13   [08:42:31.460] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 14   [08:42:31.482] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 2 structureChanged: false structureIsReused:: Completely Elapsed: 21.64602900017053ms
+Info 15   [08:42:31.482] Different program with same set of files
+Info 16   [08:44:02.163] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 17   [08:44:02.188] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 3 structureChanged: false structureIsReused:: Completely Elapsed: 24.92980800010264ms
+Info 18   [08:44:02.188] Different program with same set of files
+Info 19   [08:44:42.776] Starting updateGraphWorker: Project: /dev/null/inferredProject1*
+Info 20   [08:44:42.802] Finishing updateGraphWorker: Project: /dev/null/inferredProject1* Version: 4 structureChanged: false structureIsReused:: Completely Elapsed: 25.111496000550687ms
+Info 21   [08:44:42.802] Different program with same set of files
+Info 22   [08:49:18.086] Search path: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/server
+Info 23   [08:49:18.086] For info: /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/server/index.js :: No config files found.
+Info 24   [08:49:18.087] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
+Info 25   [08:49:18.720] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 1 structureChanged: true structureIsReused:: Not Elapsed: 632.2585909999907ms
+Info 26   [08:49:18.720] Project '/dev/null/inferredProject2*' (Inferred)
+Info 27   [08:49:18.720] 	Files (105)
+
+Info 28   [08:49:18.720] -----------------------------------------------
+Info 29   [08:49:18.977] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
+Info 30   [08:49:19.377] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 2 structureChanged: true structureIsReused:: Not Elapsed: 400.21294800005853ms
+Info 31   [08:49:19.377] Project '/dev/null/inferredProject2*' (Inferred)
+Info 32   [08:49:19.377] 	Files (112)
+
+Info 33   [08:49:19.377] -----------------------------------------------
+Info 34   [08:49:21.325] Before ensureProjectForOpenFiles:
+Info 35   [08:49:21.325] After ensureProjectForOpenFiles:
+Info 36   [08:49:21.325] got projects updated in background, updating diagnostics for /home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/canvas/canvas.js,/home/krypt0/Desktop/Uni/Third-Year/First-Semester/LTW/Project/js/server/index.js
+Info 37   [08:52:56.939] Starting updateGraphWorker: Project: /dev/null/inferredProject2*
+Info 38   [08:52:56.966] Finishing updateGraphWorker: Project: /dev/null/inferredProject2* Version: 3 structureChanged: false structureIsReused:: Completely Elapsed: 26.434884000569582ms
+Info 39   [08:52:56.966] Different program with same set of files
